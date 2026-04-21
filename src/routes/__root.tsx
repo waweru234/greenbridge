@@ -1,7 +1,9 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { AuthProvider } from "@/lib/auth";
+import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 
@@ -74,14 +76,20 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const { location } = useRouterState();
+  const isAdmin = location.pathname.startsWith("/admin") || location.pathname === "/auth";
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-      <main className="flex-1 pt-20">
-        <Outlet />
-      </main>
-      <SiteFooter />
-      <WhatsAppButton />
-    </div>
+    <AuthProvider>
+      <div className="min-h-screen flex flex-col">
+        {!isAdmin && <SiteHeader />}
+        <main className={`flex-1 ${isAdmin ? "" : "pt-20"}`}>
+          <Outlet />
+        </main>
+        {!isAdmin && <SiteFooter />}
+        {!isAdmin && <WhatsAppButton />}
+        <Toaster richColors position="top-right" />
+      </div>
+    </AuthProvider>
   );
 }
