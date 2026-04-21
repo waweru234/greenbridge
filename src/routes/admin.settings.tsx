@@ -23,7 +23,7 @@ function SettingsAdmin() {
 
   useEffect(() => {
     supabase.from("site_content").select("value").eq("key", "contact").maybeSingle().then(({ data }) => {
-      setData((data?.value as Contact) ?? { email: "", uk_phone: "", kenya_phone: "", uk_office: "", kenya_office: "", whatsapp: "" });
+      setData((data?.value as unknown as Contact) ?? { email: "", uk_phone: "", kenya_phone: "", uk_office: "", kenya_office: "", whatsapp: "" });
     });
   }, []);
 
