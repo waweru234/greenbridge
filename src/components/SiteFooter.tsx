@@ -1,0 +1,59 @@
+import { Link } from "@tanstack/react-router";
+import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
+
+export function SiteFooter() {
+  return (
+    <footer className="relative mt-24 bg-forest text-white" style={{ background: "var(--forest)" }}>
+      <div className="mx-auto max-w-7xl px-6 py-16 grid gap-10 md:grid-cols-4">
+        <div className="md:col-span-2">
+          <div className="bg-white/95 inline-flex rounded-xl p-2">
+            <img src={logo} alt="Greenbridge Energy" className="h-10 w-auto" />
+          </div>
+          <p className="mt-4 max-w-md text-white/75 leading-relaxed">
+            Greenbridge Energy Limited bridges the UK and Africa with clean,
+            affordable, future-ready power — from solar farms to wind grids.
+          </p>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-white/90">
+            Explore
+          </h4>
+          <ul className="mt-4 space-y-2 text-white/75 text-sm">
+            <li><Link to="/about" className="hover:text-white">About</Link></li>
+            <li><Link to="/services" className="hover:text-white">Services</Link></li>
+            <li><Link to="/projects" className="hover:text-white">Projects</Link></li>
+            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-white/90">
+            Reach us
+          </h4>
+          <ul className="mt-4 space-y-3 text-sm text-white/75">
+            <li className="flex items-start gap-2">
+              <MapPin className="h-4 w-4 mt-0.5 text-[color:var(--sun)]" />
+              <span>London, United Kingdom · Nairobi, Kenya</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-[color:var(--sun)]" />
+              <span>+44 20 0000 0000 · +254 700 000 000</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail className="h-4 w-4 text-[color:var(--sun)]" />
+              <span>hello@greenbridge-energy.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-6 text-xs text-white/60 flex flex-wrap items-center justify-between gap-2">
+          <span>© {new Date().getFullYear()} Greenbridge Energy Limited. All rights reserved.</span>
+          <span>Bridging Clean Energy between the UK and Africa.</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
