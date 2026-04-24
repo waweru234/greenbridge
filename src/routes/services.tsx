@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
-  Sun, Wind, Battery, Cpu, HardHat, LineChart, ArrowRight, Check,
+  Sun, Wind, Battery, Cpu, HardHat, LineChart, ArrowRight, Check, ZoomIn,
 } from "lucide-react";
 import solarImg from "@/assets/service-solar.jpg";
 import windImg from "@/assets/service-wind.jpg";
@@ -9,6 +10,19 @@ import batteryImg from "@/assets/service-battery.jpg";
 import microgridImg from "@/assets/service-microgrid.jpg";
 import epcImg from "@/assets/service-epc.jpg";
 import advisoryImg from "@/assets/service-advisory.jpg";
+import solar2 from "@/assets/gallery/solar-2.jpg";
+import solar3 from "@/assets/gallery/solar-3.jpg";
+import wind2 from "@/assets/gallery/wind-2.jpg";
+import wind3 from "@/assets/gallery/wind-3.jpg";
+import battery2 from "@/assets/gallery/battery-2.jpg";
+import battery3 from "@/assets/gallery/battery-3.jpg";
+import microgrid2 from "@/assets/gallery/microgrid-2.jpg";
+import microgrid3 from "@/assets/gallery/microgrid-3.jpg";
+import epc2 from "@/assets/gallery/epc-2.jpg";
+import epc3 from "@/assets/gallery/epc-3.jpg";
+import advisory2 from "@/assets/gallery/advisory-2.jpg";
+import advisory3 from "@/assets/gallery/advisory-3.jpg";
+import { Lightbox, type LightboxImage } from "@/components/Lightbox";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -32,6 +46,7 @@ interface Service {
   benefits: string[];
   useCases: string[];
   image: string;
+  gallery: LightboxImage[];
 }
 
 const SERVICES: Service[] = [
@@ -49,6 +64,11 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Utility solar farms", "Industrial rooftops", "Rural electrification", "Solar-powered water pumping"],
     image: solarImg,
+    gallery: [
+      { src: solarImg, caption: "Utility-scale solar farm at golden hour — capturing peak yield." },
+      { src: solar2, caption: "High-efficiency monocrystalline cells engineered for harsh climates." },
+      { src: solar3, caption: "Commercial rooftop installation — turning unused space into revenue." },
+    ],
   },
   {
     Icon: Wind,
@@ -64,6 +84,11 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Onshore wind farms", "Hybrid solar-wind plants", "Industrial self-generation", "Coastal & highland sites"],
     image: windImg,
+    gallery: [
+      { src: windImg, caption: "Highland wind farm at sunrise — consistent prevailing winds year-round." },
+      { src: wind2, caption: "Modern 4 MW turbines with 80m+ blade spans for maximum sweep area." },
+      { src: wind3, caption: "Coastal wind farm at dusk — high capacity factors near the shoreline." },
+    ],
   },
   {
     Icon: Battery,
@@ -79,6 +104,11 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Grid-scale BESS", "Commercial peak-shaving", "Backup & UPS replacement", "Microgrid storage core"],
     image: batteryImg,
+    gallery: [
+      { src: batteryImg, caption: "Containerised BESS deployed alongside a solar plant for evening dispatch." },
+      { src: battery2, caption: "Inside the container — modular lithium-ion racks with full BMS monitoring." },
+      { src: battery3, caption: "Field engineer commissioning a commercial peak-shaving battery system." },
+    ],
   },
   {
     Icon: Cpu,
@@ -94,6 +124,11 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Rural village microgrids", "Campus & hospital networks", "Mining & industrial sites", "Island & remote communities"],
     image: microgridImg,
+    gallery: [
+      { src: microgridImg, caption: "24/7 control room — operators monitoring microgrid performance live." },
+      { src: microgrid2, caption: "A village transformed: solar microgrid delivers light and safety after dark." },
+      { src: microgrid3, caption: "Smart grid orchestration — AI balancing solar, wind, batteries and load." },
+    ],
   },
   {
     Icon: HardHat,
@@ -109,6 +144,11 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Turnkey solar plants", "Wind farm construction", "BESS installation", "Grid interconnection works"],
     image: epcImg,
+    gallery: [
+      { src: epcImg, caption: "Site engineers performing final QA on a commercial PV install." },
+      { src: epc2, caption: "Mounting structures and panel rows going down on a utility-scale build." },
+      { src: epc3, caption: "Electrical commissioning of inverter and combiner cabinets." },
+    ],
   },
   {
     Icon: LineChart,
@@ -124,10 +164,18 @@ const SERVICES: Service[] = [
     ],
     useCases: ["Project feasibility", "Investor due diligence", "Net-zero roadmaps", "PPA & tariff design"],
     image: advisoryImg,
+    gallery: [
+      { src: advisoryImg, caption: "Boardroom briefing — translating energy data into investor-ready insight." },
+      { src: advisory2, caption: "Multi-disciplinary advisory team co-designing a bankable project." },
+      { src: advisory3, caption: "Live financial modelling on-site at a candidate solar development." },
+    ],
   },
 ];
 
 function ServicesPage() {
+  // One lightbox state shared across all sections; tracks which service + image
+  const [lightbox, setLightbox] = useState<{ service: number; image: number } | null>(null);
+
   return (
     <>
       {/* Hero */}
@@ -188,7 +236,7 @@ function ServicesPage() {
       {/* Detailed service sections */}
       <section className="pb-12">
         <div className="mx-auto max-w-7xl px-6 space-y-24 md:space-y-32">
-          {SERVICES.map(({ Icon, title, tagline, description, benefits, useCases, image }, i) => {
+          {SERVICES.map(({ Icon, title, tagline, description, benefits, useCases, image, gallery }, i) => {
             const reverse = i % 2 === 1;
             const slug = title.toLowerCase().replace(/[^a-z]+/g, "-");
             return (
@@ -199,73 +247,126 @@ function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.7 }}
-                className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center scroll-mt-24 ${reverse ? "lg:[&>div:first-child]:order-2" : ""}`}
+                className="scroll-mt-24"
               >
-                {/* Image */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                  className="relative"
-                >
-                  <div className="absolute -inset-4 bg-gradient-bridge opacity-20 blur-2xl rounded-[2.5rem]" />
-                  <div className="relative overflow-hidden rounded-[2rem] shadow-glow border border-border group">
-                    <img
-                      src={image}
-                      alt={title}
-                      width={1280}
-                      height={800}
-                      loading="lazy"
-                      className="w-full h-[320px] md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/40 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute top-5 left-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur text-[color:var(--leaf-deep)] shadow-soft">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Text */}
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--leaf-deep)]">
-                    0{i + 1} — Service
-                  </p>
-                  <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">{title}</h2>
-                  <p className="mt-4 text-lg text-[color:var(--forest)] font-medium italic">{tagline}</p>
-                  <p className="mt-5 text-muted-foreground leading-relaxed text-[1.02rem]">{description}</p>
-
-                  <div className="mt-7">
-                    <p className="text-sm font-semibold uppercase tracking-wider text-foreground/80 mb-3">Key benefits</p>
-                    <ul className="grid sm:grid-cols-2 gap-2.5">
-                      {benefits.map((b) => (
-                        <li key={b} className="flex items-start gap-2.5">
-                          <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[color:var(--leaf)]/15 text-[color:var(--leaf-deep)] shrink-0">
-                            <Check className="h-3 w-3" strokeWidth={3} />
-                          </span>
-                          <span className="text-sm text-foreground/90 leading-snug">{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-6">
-                    <p className="text-sm font-semibold uppercase tracking-wider text-foreground/80 mb-3">Where we deploy it</p>
-                    <div className="flex flex-wrap gap-2">
-                      {useCases.map((u) => (
-                        <span key={u} className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
-                          {u}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Link
-                    to="/contact"
-                    className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-bridge text-white px-6 py-3 font-semibold shadow-sun hover:-translate-y-0.5 transition"
+                <div className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${reverse ? "lg:[&>div:first-child]:order-2" : ""}`}>
+                  {/* Image */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
+                    className="relative"
                   >
-                    Discuss your {title.toLowerCase()} project <ArrowRight className="h-4 w-4" />
-                  </Link>
+                    <div className="absolute -inset-4 bg-gradient-bridge opacity-20 blur-2xl rounded-[2.5rem]" />
+                    <button
+                      type="button"
+                      onClick={() => setLightbox({ service: i, image: 0 })}
+                      className="relative block w-full overflow-hidden rounded-[2rem] shadow-glow border border-border group cursor-zoom-in"
+                      aria-label={`Open gallery for ${title}`}
+                    >
+                      <img
+                        src={image}
+                        alt={title}
+                        width={1280}
+                        height={800}
+                        loading="lazy"
+                        className="w-full h-[320px] md:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/40 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-5 left-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur text-[color:var(--leaf-deep)] shadow-soft">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="absolute bottom-5 right-5 inline-flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur text-white text-xs font-medium px-3 py-1.5 opacity-0 group-hover:opacity-100 transition">
+                        <ZoomIn className="h-3.5 w-3.5" /> View gallery
+                      </div>
+                    </button>
+                  </motion.div>
+
+                  {/* Text */}
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--leaf-deep)]">
+                      0{i + 1} — Service
+                    </p>
+                    <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">{title}</h2>
+                    <p className="mt-4 text-lg text-[color:var(--forest)] font-medium italic">{tagline}</p>
+                    <p className="mt-5 text-muted-foreground leading-relaxed text-[1.02rem]">{description}</p>
+
+                    <div className="mt-7">
+                      <p className="text-sm font-semibold uppercase tracking-wider text-foreground/80 mb-3">Key benefits</p>
+                      <ul className="grid sm:grid-cols-2 gap-2.5">
+                        {benefits.map((b) => (
+                          <li key={b} className="flex items-start gap-2.5">
+                            <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[color:var(--leaf)]/15 text-[color:var(--leaf-deep)] shrink-0">
+                              <Check className="h-3 w-3" strokeWidth={3} />
+                            </span>
+                            <span className="text-sm text-foreground/90 leading-snug">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-6">
+                      <p className="text-sm font-semibold uppercase tracking-wider text-foreground/80 mb-3">Where we deploy it</p>
+                      <div className="flex flex-wrap gap-2">
+                        {useCases.map((u) => (
+                          <span key={u} className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
+                            {u}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Link
+                      to="/contact"
+                      className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-bridge text-white px-6 py-3 font-semibold shadow-sun hover:-translate-y-0.5 transition"
+                    >
+                      Discuss your {title.toLowerCase()} project <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Gallery */}
+                <div className="mt-12">
+                  <div className="flex items-end justify-between mb-5">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--leaf-deep)]">Gallery</p>
+                      <h3 className="mt-1 text-2xl font-semibold">{title} in the field</h3>
+                    </div>
+                    <p className="hidden md:block text-xs text-muted-foreground">Click any image to enlarge</p>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {gallery.map((g, gi) => (
+                      <motion.button
+                        key={g.src}
+                        type="button"
+                        onClick={() => setLightbox({ service: i, image: gi })}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: gi * 0.08 }}
+                        className="group relative overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft hover:shadow-glow transition-all hover:-translate-y-1 cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[color:var(--leaf)]"
+                        aria-label={`Open image: ${g.caption}`}
+                      >
+                        <div className="aspect-[4/3] overflow-hidden">
+                          <img
+                            src={g.src}
+                            alt={g.alt ?? g.caption}
+                            width={1280}
+                            height={800}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                        </div>
+                        <div className="absolute top-3 right-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-[color:var(--leaf-deep)] shadow-soft opacity-0 group-hover:opacity-100 transition">
+                          <ZoomIn className="h-4 w-4" />
+                        </div>
+                        <figcaption className="p-4 text-sm text-foreground/90 leading-snug">
+                          {g.caption}
+                        </figcaption>
+                      </motion.button>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             );
@@ -321,6 +422,14 @@ function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <Lightbox
+        images={lightbox !== null ? SERVICES[lightbox.service].gallery : []}
+        index={lightbox?.image ?? null}
+        onClose={() => setLightbox(null)}
+        onChange={(image) => setLightbox((prev) => (prev ? { ...prev, image } : prev))}
+      />
     </>
   );
 }
