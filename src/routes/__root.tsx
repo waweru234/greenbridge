@@ -2,7 +2,6 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } f
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ChatBot } from "@/components/ChatBot";
 import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "sonner";
 
@@ -42,10 +41,15 @@ export const Route = createRootRoute({
           "Greenbridge Energy delivers solar, wind and grid solutions across the UK and Africa. Sustainable power, real-world impact.",
       },
       { name: "author", content: "Greenbridge Energy Limited" },
-      { property: "og:title", content: "Greenbridge Energy" },
-      { property: "og:description", content: "Bridging Clean Energy between the UK and Africa." },
+      { property: "og:title", content: "Greenbridge Energy — Bridging Clean Energy between the UK & Africa" },
+      { property: "og:description", content: "A full-stack web application for a renewable energy company, featuring a public website and an admin dashboard for content management." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Greenbridge Energy — Bridging Clean Energy between the UK & Africa" },
+      { name: "description", content: "A full-stack web application for a renewable energy company, featuring a public website and an admin dashboard for content management." },
+      { name: "twitter:description", content: "A full-stack web application for a renewable energy company, featuring a public website and an admin dashboard for content management." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/EjPnjq2fCrc6tzmcwjrl6UKTP7o1/social-images/social-1777011379492-Untitled_design_(14).webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/EjPnjq2fCrc6tzmcwjrl6UKTP7o1/social-images/social-1777011379492-Untitled_design_(14).webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -89,7 +93,6 @@ function RootComponent() {
         </main>
         {!isAdmin && <SiteFooter />}
         {!isAdmin && <WhatsAppButton />}
-        {!isAdmin && <ChatBot />}
         <Toaster richColors position="top-right" />
       </div>
     </AuthProvider>
