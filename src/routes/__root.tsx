@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, useRouterState, HeadContent } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -38,6 +38,7 @@ function RootComponent() {
 
   return (
     <AuthProvider>
+      <HeadContent />
       <div className="min-h-screen flex flex-col">
         {!isAdmin && <SiteHeader />}
         <main className={`flex-1 ${isAdmin ? "" : "pt-20"}`}>
