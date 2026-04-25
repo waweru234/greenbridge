@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Zap } from "lucide-react";
+import { MapPin, Zap, Sparkles } from "lucide-react";
 import africa from "@/assets/project-africa.jpg";
 import uk from "@/assets/project-uk.jpg";
 import install from "@/assets/project-install.jpg";
@@ -19,25 +19,28 @@ export const Route = createFileRoute("/projects")({
 
 const PROJECTS = [
   {
-    img: africa,
-    location: "Naivasha, Kenya",
-    title: "Naivasha Solar Farm",
-    capacity: "45 MW",
-    desc: "A utility-scale solar farm powering over 30,000 homes and feeding clean energy into Kenya's national grid.",
-  },
-  {
     img: uk,
-    location: "Yorkshire, UK",
-    title: "Pennine Wind Cluster",
-    capacity: "62 MW",
-    desc: "Six high-efficiency turbines on the Pennine ridge, delivering reliable wind power into the UK grid year-round.",
+    location: "Birmingham, United Kingdom",
+    title: "Residential Solar Installation",
+    capacity: "6.5 kW Solar PV",
+    desc: "A rooftop solar PV system designed for a family home, sized to maximise self-consumption and long-term return.",
+    outcome: "Reduced household energy costs by 60% and significantly improved energy independence.",
   },
   {
     img: install,
     location: "Nairobi, Kenya",
-    title: "Industrial Rooftop Programme",
-    capacity: "8.5 MW",
-    desc: "Rooftop solar across 14 manufacturing plants, cutting energy bills by an average of 38%.",
+    title: "Commercial Hybrid Solar System",
+    capacity: "30 kW Hybrid Solar",
+    desc: "A grid-tied hybrid solar + battery system powering a busy commercial site, with seamless backup during outages.",
+    outcome: "Cut diesel generator usage by 70%, dramatically lowering operational and fuel costs.",
+  },
+  {
+    img: africa,
+    location: "Kisumu, Kenya",
+    title: "Off-Grid Rural Electrification",
+    capacity: "15 kW Solar Mini-Grid",
+    desc: "A community-scale solar mini-grid bringing dependable, clean electricity to a previously off-grid rural area.",
+    outcome: "Powered 120+ homes and small businesses, unlocking new income and education opportunities.",
   },
 ];
 
@@ -80,6 +83,10 @@ function ProjectsPage() {
                 </div>
                 <h2 className="mt-4 text-4xl font-semibold leading-tight">{p.title}</h2>
                 <p className="mt-4 text-muted-foreground text-lg leading-relaxed">{p.desc}</p>
+                <div className="mt-5 rounded-2xl border border-[color:var(--leaf-deep)]/20 bg-[color:var(--leaf-deep)]/5 p-4 flex gap-3">
+                  <Sparkles className="h-5 w-5 shrink-0 text-[color:var(--leaf-deep)] mt-0.5" />
+                  <p className="text-sm text-foreground/85"><span className="font-semibold">Outcome — </span>{p.outcome}</p>
+                </div>
               </div>
             </motion.article>
           ))}
