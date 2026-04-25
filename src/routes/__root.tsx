@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, useRouterState, HeadContent } from "@tan
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ChatBot } from "@/components/ChatBot";
 import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "sonner";
 
@@ -46,6 +47,7 @@ function RootComponent() {
         </main>
         {!isAdmin && <SiteFooter />}
         {!isAdmin && <WhatsAppButton />}
+        {!isAdmin && <ChatBot />}
         <Toaster richColors position="top-right" />
       </div>
     </AuthProvider>
