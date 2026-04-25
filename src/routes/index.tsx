@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { ArrowRight, Sun, Wind, Zap, Leaf, Globe2, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
+import projectUk from "@/assets/project-uk.jpg";
+import projectInstall from "@/assets/project-install.jpg";
 import projectAfrica from "@/assets/project-africa.jpg";
 
 export const Route = createFileRoute("/")({
@@ -245,36 +247,27 @@ function HomePage() {
               End-to-end <span className="text-gradient-bridge">renewable solutions</span>
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              From feasibility to switch-on, we deliver every layer of the clean energy stack.
+              From feasibility to switch-on, we deliver every layer of the clean energy stack — across the UK and Africa.
             </p>
           </motion.div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              {
-                Icon: Sun,
-                t: "Solar PV Systems",
-                d: "Utility-scale farms, commercial rooftops and off-grid kits engineered for African sun and UK climate.",
-              },
-              {
-                Icon: Wind,
-                t: "Wind & Hybrid",
-                d: "Wind turbines and hybrid solar-wind installations with intelligent storage for 24/7 reliability.",
-              },
-              {
-                Icon: Zap,
-                t: "Grid & Storage",
-                d: "Battery storage, microgrids and grid-tie engineering that keeps the lights on, sustainably.",
-              },
-            ].map(({ Icon, t, d }, i) => (
+              { Icon: Sun, t: "Solar PV Installation", d: "Residential, commercial and utility-scale solar PV systems engineered for the UK climate and African sun.", tag: "UK & Africa" },
+              { Icon: Battery, t: "Battery Storage Solutions", d: "Lithium-ion battery systems that store solar by day and power your site through the evening peak — or a blackout.", tag: "Backup & Peak-shaving" },
+              { Icon: Cpu, t: "Off-Grid & Hybrid Systems", d: "Solar + battery + (optional) generator microgrids bringing 24/7 reliable power to off-grid homes, clinics and villages.", tag: "Africa Focus" },
+              { Icon: Building2, t: "Commercial & Industrial", d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.", tag: "C&I Energy" },
+              { Icon: LineChart, t: "Energy Consultation & Design", d: "Independent feasibility studies, system sizing, financial modelling and bankable system design.", tag: "Advisory" },
+              { Icon: Zap, t: "Maintenance & Monitoring", d: "Proactive O&M, remote performance monitoring and rapid on-site response to keep every kilowatt earning its keep.", tag: "Lifetime support" },
+            ].map(({ Icon, t, d, tag }, i) => (
               <motion.div
                 key={t}
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
+                transition={{ duration: 0.6, delay: (i % 3) * 0.12 }}
                 whileHover={{ y: -6 }}
-                className="group relative rounded-3xl bg-card p-8 shadow-soft hover:shadow-glow transition-all overflow-hidden"
+                className="group relative rounded-3xl bg-card p-7 shadow-soft hover:shadow-glow transition-all overflow-hidden border border-border"
               >
                 <motion.div
                   className="absolute -top-12 -right-12 h-32 w-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -287,11 +280,14 @@ function HomePage() {
                 >
                   <Icon className="h-6 w-6" />
                 </motion.div>
-                <h3 className="relative mt-6 text-2xl font-semibold">{t}</h3>
-                <p className="relative mt-3 text-muted-foreground leading-relaxed">{d}</p>
+                <div className="relative mt-5 inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-semibold text-[color:var(--forest)]">
+                  {tag}
+                </div>
+                <h3 className="relative mt-3 text-xl font-semibold leading-snug">{t}</h3>
+                <p className="relative mt-2 text-muted-foreground leading-relaxed text-sm">{d}</p>
                 <Link
                   to="/services"
-                  className="relative mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--leaf-deep)] hover:gap-2 transition-all"
+                  className="relative mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--leaf-deep)] hover:gap-2 transition-all"
                 >
                   Learn more <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -301,82 +297,137 @@ function HomePage() {
         </div>
       </section>
 
-      {/* IMPACT split */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-6 grid gap-12 md:grid-cols-2 items-center">
+      {/* PROJECTS / IMPACT */}
+      <section className="py-24 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative rounded-[2rem] overflow-hidden shadow-glow"
-          >
-            <motion.img
-              src={projectAfrica}
-              alt="Solar farm in Africa"
-              className="w-full h-[480px] object-cover"
-              loading="lazy"
-              width={1280}
-              height={832}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.8 }}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute bottom-5 left-5 glass rounded-2xl px-5 py-3"
-            >
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-[color:var(--leaf)] opacity-75 animate-ping" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--leaf-deep)]" />
-                </span>
-                Live project
-              </div>
-              <div className="font-semibold">Naivasha Solar Farm · 45 MW</div>
-            </motion.div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
-              Real impact
+              Projects & impact
             </p>
             <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
-              Power that travels{" "}
-              <em className="not-italic text-gradient-bridge">further</em>.
+              Real systems. <span className="text-gradient-bridge">Measurable results.</span>
             </h2>
-            <p className="mt-5 text-muted-foreground text-lg">
-              Every Greenbridge project is engineered to lower carbon, lower bills, and unlock opportunity for the people it serves — from rural Kenyan villages to British industrial parks.
+            <p className="mt-4 text-muted-foreground text-lg">
+              A snapshot of recent installations and the impact they're delivering for homes, businesses and communities.
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              {[
-                { Icon: Globe2, t: "2 continents", d: "UK + Africa coverage" },
-                { Icon: ShieldCheck, t: "ISO-aligned", d: "Engineering excellence" },
-                { Icon: Leaf, t: "85k tCO₂e", d: "Avoided annually" },
-                { Icon: Zap, t: "24/7", d: "Monitoring & support" },
-              ].map(({ Icon, t, d }, i) => (
-                <motion.div
-                  key={t}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  whileHover={{ y: -3, borderColor: "var(--leaf)" }}
-                  className="rounded-2xl border border-border p-4 transition"
-                >
-                  <Icon className="h-5 w-5 text-[color:var(--leaf-deep)]" />
-                  <div className="mt-2 font-semibold">{t}</div>
-                  <div className="text-sm text-muted-foreground">{d}</div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {[
+              { img: projectUk, location: "Birmingham, UK", title: "UK Residential Solar", capacity: "6.5 kW Solar PV", Icon: TrendingDown, metric: "60%", metricLabel: "energy bill savings", desc: "Rooftop solar PV for a family home, sized for maximum self-consumption and long-term return." },
+              { img: projectInstall, location: "Nairobi, Kenya", title: "Nairobi Commercial Solar", capacity: "30 kW Hybrid Solar", Icon: Zap, metric: "70%", metricLabel: "diesel reduction", desc: "Grid-tied hybrid solar + battery powering a busy commercial site with seamless backup during outages." },
+              { img: projectAfrica, location: "Kisumu, Kenya", title: "Kisumu Mini-Grid", capacity: "15 kW Solar Mini-Grid", Icon: Users, metric: "120+", metricLabel: "homes powered", desc: "Community solar mini-grid bringing dependable, clean electricity to a previously off-grid rural area." },
+            ].map((p, i) => (
+              <motion.article
+                key={p.title}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -6 }}
+                className="group rounded-3xl overflow-hidden bg-card shadow-soft hover:shadow-glow transition-all border border-border flex flex-col"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <img src={p.img} alt={p.title} loading="lazy" width={1280} height={832} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/70 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 glass rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1.5">
+                    <MapPin className="h-3 w-3 text-[color:var(--leaf-deep)]" /> {p.location}
+                  </div>
+                  <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[11px] font-semibold text-[color:var(--forest)]">
+                    <Sparkles className="h-3 w-3 text-[color:var(--sun-deep)]" /> {p.capacity}
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-semibold leading-tight">{p.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                  <div className="mt-5 flex items-center gap-3 rounded-2xl border border-[color:var(--leaf-deep)]/20 bg-[color:var(--leaf-deep)]/5 p-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-bridge text-white shrink-0">
+                      <p.Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-2xl font-display font-semibold leading-none text-[color:var(--leaf-deep)]">{p.metric}</div>
+                      <div className="text-xs text-muted-foreground mt-1">{p.metricLabel}</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-bridge text-white px-6 py-3 font-semibold shadow-sun hover:-translate-y-0.5 transition"
+            >
+              See all projects <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-24 bg-gradient-soft">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
+              Testimonials
+            </p>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
+              Trusted across <span className="text-gradient-bridge">two continents</span>.
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              What our clients say about working with the Greenbridge team.
+            </p>
+          </motion.div>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {[
+              { quote: "Greenbridge transformed our business by providing a reliable solar solution. We've cut our energy costs significantly and our operations no longer stop when the grid does.", name: "James M.", role: "Business Owner", location: "Nairobi" },
+              { quote: "Professional, efficient and highly knowledgeable team. From the first site visit to switch-on, every step felt considered. Our home runs on the sun now.", name: "Sarah W.", role: "Homeowner", location: "United Kingdom" },
+              { quote: "Our village finally has dependable electricity after dark. Children can study, the clinic stays open, and small businesses are thriving. It changed everything.", name: "Daniel O.", role: "Community Leader", location: "Kisumu" },
+            ].map((t, i) => (
+              <motion.figure
+                key={t.name}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -6 }}
+                className="relative rounded-3xl bg-card p-8 shadow-soft hover:shadow-glow transition-all border border-border flex flex-col"
+              >
+                <Quote className="h-8 w-8 text-[color:var(--leaf-deep)]/25" />
+                <div className="mt-3 flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} className="h-4 w-4 fill-[color:var(--sun)] text-[color:var(--sun)]" />
+                  ))}
+                </div>
+                <blockquote className="mt-4 text-foreground/90 leading-relaxed flex-1">
+                  "{t.quote}"
+                </blockquote>
+                <figcaption className="mt-6 pt-5 border-t border-border flex items-center justify-between gap-3">
+                  <div>
+                    <div className="font-semibold leading-tight">{t.name}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{t.role}</div>
+                  </div>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-[color:var(--forest)] shrink-0">
+                    <MapPin className="h-3 w-3 text-[color:var(--leaf-deep)]" /> {t.location}
+                  </span>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
         </div>
       </section>
 
