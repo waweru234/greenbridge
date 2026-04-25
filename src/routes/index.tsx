@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { ArrowRight, Sun, Wind, Zap, Leaf, Globe2, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
+import projectUk from "@/assets/project-uk.jpg";
+import projectInstall from "@/assets/project-install.jpg";
 import projectAfrica from "@/assets/project-africa.jpg";
 
 export const Route = createFileRoute("/")({
