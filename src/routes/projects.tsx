@@ -2,12 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin, Zap, Sparkles } from "lucide-react";
 import africa from "@/assets/project-africa.jpg";
-import uk from "@/assets/project-uk.jpg";
 import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
 import installTeam from "@/assets/uploads/install-team-roof.jpg";
 import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
 import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
 import siteInstall from "@/assets/uploads/site-installation.jpg";
+import nasho from "@/assets/uploads/nasho-irrigation.jpg";
+import windTurbine1 from "@/assets/uploads/wind-turbine-1.jpg";
+import securityLight from "@/assets/uploads/security-light.jpg";
+import homeLight from "@/assets/uploads/home-solar-light.jpg";
 
 
 export const Route = createFileRoute("/projects")({

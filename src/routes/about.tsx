@@ -26,7 +26,7 @@ const LEADERS = [
     role: "Founder & Director",
     photo: jimsley,
     creds: ["PhD, Mechanical Engineering", "Energy Systems & Infrastructure"],
-    bio: "Jimsley brings deep technical expertise in energy systems, infrastructure and business development, with a strategic vision to bridge clean-energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to reliable, affordable clean energy across Africa.",
+    bio: "PhD Mechanical Engineer with experience in energy systems, infrastructure, and business development. Jimsley brings a strong technical background and a strategic vision to bridge energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to clean energy across Africa.",
   },
 ];
 
