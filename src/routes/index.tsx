@@ -256,9 +256,8 @@ function HomePage() {
               { Icon: Sun, t: "Solar PV Installation", d: "Residential, commercial and utility-scale solar PV systems engineered for the UK climate and African sun.", tag: "UK & Africa" },
               { Icon: Battery, t: "Battery Storage Solutions", d: "Lithium-ion battery systems that store solar by day and power your site through the evening peak — or a blackout.", tag: "Backup & Peak-shaving" },
               { Icon: Cpu, t: "Off-Grid & Hybrid Systems", d: "Solar + battery + (optional) generator microgrids bringing 24/7 reliable power to off-grid homes, clinics and villages.", tag: "Africa Focus" },
-              { Icon: Building2, t: "Commercial & Industrial", d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.", tag: "C&I Energy" },
-              { Icon: LineChart, t: "Energy Consultation & Design", d: "Independent feasibility studies, system sizing, financial modelling and bankable system design.", tag: "Advisory" },
-              { Icon: Zap, t: "Maintenance & Monitoring", d: "Proactive O&M, remote performance monitoring and rapid on-site response to keep every kilowatt earning its keep.", tag: "Lifetime support" },
+              { Icon: Building2, t: "Commercial & Industrial Energy Solutions", d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.", tag: "C&I Energy" },
+              { Icon: LineChart, t: "Energy Consultation & System Design", d: "Independent feasibility studies, system sizing, financial modelling and bankable system design.", tag: "Advisory" },
             ].map(({ Icon, t, d, tag }, i) => (
               <motion.div
                 key={t}
