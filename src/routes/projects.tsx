@@ -45,6 +45,15 @@ const PROJECTS = [
     tag: "Greenbridge build",
   },
   {
+    img: solarBorehole,
+    location: "Kisumu, Kenya",
+    title: "Off-Grid Rural Mini-Grid",
+    capacity: "15 kW Solar Mini-Grid",
+    desc: "A community-scale solar mini-grid bringing dependable, clean electricity to a previously off-grid rural area.",
+    outcome: "Powered 120+ homes and small businesses, unlocking new income and education opportunities.",
+    tag: "Greenbridge build",
+  },
+  {
     img: homeLight,
     location: "UK & Kenya — Domestic",
     title: "Solar Home Lighting Roll-out",
@@ -168,13 +177,13 @@ function ProjectsPage() {
             className="max-w-3xl"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
-              Landmark Kenyan solar plants
+              Landmark African solar projects
             </p>
             <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
-              Powering the nation, <span className="text-gradient-bridge">megawatt by megawatt</span>.
+              Powering the continent, <span className="text-gradient-bridge">megawatt by megawatt</span>.
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              The utility-scale projects shaping Kenya's renewable energy future — and inspiring the work we do.
+              The flagship utility-scale and agricultural solar projects shaping Africa's renewable future — and inspiring the work we do.
             </p>
           </motion.div>
 
