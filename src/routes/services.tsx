@@ -2,26 +2,27 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  Sun, Wind, Battery, Cpu, HardHat, LineChart, ArrowRight, Check, ZoomIn,
+  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn,
 } from "lucide-react";
 import solarImg from "@/assets/service-solar.jpg";
-import windImg from "@/assets/service-wind.jpg";
 import batteryImg from "@/assets/service-battery.jpg";
 import microgridImg from "@/assets/service-microgrid.jpg";
 import epcImg from "@/assets/service-epc.jpg";
 import advisoryImg from "@/assets/service-advisory.jpg";
 import solar2 from "@/assets/gallery/solar-2.jpg";
 import solar3 from "@/assets/gallery/solar-3.jpg";
-import wind2 from "@/assets/gallery/wind-2.jpg";
-import wind3 from "@/assets/gallery/wind-3.jpg";
 import battery2 from "@/assets/gallery/battery-2.jpg";
 import battery3 from "@/assets/gallery/battery-3.jpg";
 import microgrid2 from "@/assets/gallery/microgrid-2.jpg";
 import microgrid3 from "@/assets/gallery/microgrid-3.jpg";
-import epc2 from "@/assets/gallery/epc-2.jpg";
-import epc3 from "@/assets/gallery/epc-3.jpg";
-import advisory2 from "@/assets/gallery/advisory-2.jpg";
-import advisory3 from "@/assets/gallery/advisory-3.jpg";
+// Real field photos from Greenbridge installations
+import installTeam from "@/assets/uploads/install-team-roof.jpg";
+import installerPortrait from "@/assets/uploads/installer-portrait.png";
+import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
+import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
+import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
+import inverterPanel from "@/assets/uploads/inverter-control-panel.jpg";
+import siteInstall from "@/assets/uploads/site-installation.jpg";
 import { Lightbox, type LightboxImage } from "@/components/Lightbox";
 
 export const Route = createFileRoute("/services")({
