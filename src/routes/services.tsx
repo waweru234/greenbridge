@@ -146,7 +146,45 @@ const SERVICES: Service[] = [
     ],
   },
   {
-    Icon: LineChart,
+    Icon: Lightbulb,
+    title: "Solar Lighting (Home & Security)",
+    tagline: "Clean, instant, zero-running-cost light — for every home and every perimeter.",
+    description:
+      "We supply and install solar lighting solutions for two everyday needs: solar lights for domestic homes — replacing kerosene lamps and unreliable grid evenings with safe, bright LED light — and motion-activated solar security floodlights that protect compounds, schools and businesses around the clock with no wiring and no electricity bill.",
+    benefits: [
+      "Plug-and-play solar home lighting kits",
+      "Motion-sensor security floodlights with built-in batteries",
+      "Zero running cost — no grid, no fuel",
+      "Quick install: most sites done in under a day",
+    ],
+    useCases: ["Domestic home lighting", "Compound & perimeter security", "Schools & clinics", "Street & pathway lighting"],
+    image: homeLight,
+    gallery: [
+      { src: homeLight, caption: "Solar home lighting kit — bringing safe, bright LED light to every room." },
+      { src: securityLight, caption: "All-in-one solar security floodlight with motion sensor — installed in minutes." },
+      { src: solarStreet, caption: "Solar pathway and street lights illuminating community walkways at night." },
+    ],
+  },
+  {
+    Icon: Wind,
+    title: "Wind Power Generators",
+    tagline: "Catch the wind. Power the night. True 24/7 hybrid renewable energy.",
+    description:
+      "For sites with steady wind — coastal locations, highlands and exposed plains — we deploy small-scale wind turbines designed to complement solar PV. Together, solar and wind generate around the clock and across seasons, dramatically reducing reliance on diesel and grid backup. Our turbines come fully engineered with hybrid inverters, batteries and remote monitoring.",
+    benefits: [
+      "Generates power after sunset and on cloudy days",
+      "Pairs perfectly with solar + battery for 24/7 supply",
+      "Low-maintenance, weather-rated turbines",
+      "Smart hybrid controllers balance every source automatically",
+    ],
+    useCases: ["Coastal sites", "Highland farms & lodges", "Telecom & remote stations", "Solar-wind hybrid microgrids"],
+    image: windTurbine1,
+    gallery: [
+      { src: windTurbine1, caption: "Small-scale wind turbine generating clean power on a windy coastal site." },
+      { src: windTurbine2, caption: "Wind farm landscape — proof of how powerful African and UK wind resources can be." },
+    ],
+  },
+  {
     title: "Energy Consultation & System Design",
     tagline: "Independent feasibility, sizing and bankable design.",
     description:
