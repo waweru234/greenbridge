@@ -185,6 +185,7 @@ const SERVICES: Service[] = [
     ],
   },
   {
+    Icon: LineChart,
     title: "Energy Consultation & System Design",
     tagline: "Independent feasibility, sizing and bankable design.",
     description:
