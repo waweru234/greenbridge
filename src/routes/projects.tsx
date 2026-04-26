@@ -3,15 +3,20 @@ import { motion } from "framer-motion";
 import { MapPin, Zap, Sparkles } from "lucide-react";
 import africa from "@/assets/project-africa.jpg";
 import uk from "@/assets/project-uk.jpg";
-import install from "@/assets/project-install.jpg";
+import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
+import installTeam from "@/assets/uploads/install-team-roof.jpg";
+import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
+import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
+import siteInstall from "@/assets/uploads/site-installation.jpg";
+import inverterPanel from "@/assets/uploads/inverter-control-panel.jpg";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
       { title: "Projects — Greenbridge Energy" },
-      { name: "description", content: "Featured renewable energy projects delivered by Greenbridge across the UK and Africa." },
+      { name: "description", content: "Featured renewable energy projects delivered by Greenbridge across the UK and Africa, plus landmark Kenyan solar plants powering the region." },
       { property: "og:title", content: "Projects — Greenbridge Energy" },
-      { property: "og:description", content: "Solar farms, wind installations and microgrids delivered across the UK and Africa." },
+      { property: "og:description", content: "Solar, battery and hybrid systems delivered across the UK and Africa." },
     ],
   }),
   component: ProjectsPage,
@@ -19,28 +24,58 @@ export const Route = createFileRoute("/projects")({
 
 const PROJECTS = [
   {
-    img: uk,
+    img: groundMount,
     location: "Birmingham, United Kingdom",
     title: "Residential Solar Installation",
     capacity: "6.5 kW Solar PV",
     desc: "A rooftop solar PV system designed for a family home, sized to maximise self-consumption and long-term return.",
     outcome: "Reduced household energy costs by 60% and significantly improved energy independence.",
+    tag: "Greenbridge build",
   },
   {
-    img: install,
+    img: installTeam,
     location: "Nairobi, Kenya",
     title: "Commercial Hybrid Solar System",
     capacity: "30 kW Hybrid Solar",
     desc: "A grid-tied hybrid solar + battery system powering a busy commercial site, with seamless backup during outages.",
     outcome: "Cut diesel generator usage by 70%, dramatically lowering operational and fuel costs.",
+    tag: "Greenbridge build",
   },
   {
-    img: africa,
+    img: solarBorehole,
     location: "Kisumu, Kenya",
     title: "Off-Grid Rural Electrification",
     capacity: "15 kW Solar Mini-Grid",
     desc: "A community-scale solar mini-grid bringing dependable, clean electricity to a previously off-grid rural area.",
     outcome: "Powered 120+ homes and small businesses, unlocking new income and education opportunities.",
+    tag: "Greenbridge build",
+  },
+];
+
+const KENYA_LANDMARKS = [
+  {
+    img: africa,
+    location: "Garissa, Kenya",
+    title: "Garissa Solar Power Plant",
+    capacity: "50 MW Utility Solar",
+    desc: "The largest grid-connected solar plant in East and Central Africa, feeding clean electricity directly into the national grid.",
+    outcome: "Powers tens of thousands of homes and offsets significant fossil-fuel generation across the region.",
+  },
+  {
+    img: roofCloseup,
+    location: "Malindi, Kenya",
+    title: "Malindi Solar Project",
+    capacity: "52 MW Utility Solar",
+    desc: "A major utility-scale solar plant near Malindi developed by Globeleq, supplying the Kenyan national grid.",
+    outcome: "Adds substantial low-carbon capacity to the coastal region and supports Kenya's renewable energy targets.",
+  },
+  {
+    img: siteInstall,
+    location: "Eldoret (Kesses), Kenya",
+    title: "Kesses Solar Project",
+    capacity: "40 MW Utility Solar",
+    desc: "A utility-scale solar plant located in Eldoret, improving energy access and grid reliability across the Rift Valley.",
+    outcome: "Strengthens energy access for the Rift Valley and supports industrial growth in western Kenya.",
   },
 ];
 
