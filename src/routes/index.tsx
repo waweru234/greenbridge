@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star } from "lucide-react";
+import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
 import projectUk from "@/assets/uploads/ground-mount-residential.jpg";
 import projectInstall from "@/assets/uploads/install-team-roof.jpg";
@@ -257,6 +257,8 @@ function HomePage() {
               { Icon: Battery, t: "Battery Storage Solutions", d: "Lithium-ion battery systems that store solar by day and power your site through the evening peak — or a blackout.", tag: "Backup & Peak-shaving" },
               { Icon: Cpu, t: "Off-Grid & Hybrid Systems", d: "Solar + battery + (optional) generator microgrids bringing 24/7 reliable power to off-grid homes, clinics and villages.", tag: "Africa Focus" },
               { Icon: Building2, t: "Commercial & Industrial Energy Solutions", d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.", tag: "C&I Energy" },
+              { Icon: Lightbulb, t: "Solar Lighting (Home & Security)", d: "Solar lights for domestic homes and motion-activated security floodlights — clean, instant, zero-running-cost light wherever you need it.", tag: "Domestic & Security" },
+              { Icon: Wind, t: "Wind Power Generators", d: "Small-scale wind turbines paired with solar to deliver true 24/7 renewable generation in windy coastal and highland sites.", tag: "Hybrid Renewable" },
               { Icon: LineChart, t: "Energy Consultation & System Design", d: "Independent feasibility studies, system sizing, financial modelling and bankable system design.", tag: "Advisory" },
             ].map(({ Icon, t, d, tag }, i) => (
               <motion.div
