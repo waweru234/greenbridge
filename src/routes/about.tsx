@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Clock, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
-import team from "@/assets/about-team.jpg";
+
 import jimsley from "@/assets/leader-jimsley.jpg";
 import story1 from "@/assets/uploads/story-1.jpg";
 import story2 from "@/assets/uploads/story-2.jpg";
