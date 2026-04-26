@@ -8,7 +8,7 @@ import installTeam from "@/assets/uploads/install-team-roof.jpg";
 import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
 import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
 import siteInstall from "@/assets/uploads/site-installation.jpg";
-import inverterPanel from "@/assets/uploads/inverter-control-panel.jpg";
+
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -125,6 +125,62 @@ function ProjectsPage() {
               </div>
             </motion.article>
           ))}
+        </div>
+      </section>
+
+      {/* KENYA LANDMARK SOLAR PROJECTS */}
+      <section className="py-20 bg-gradient-soft border-t border-border">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
+              Landmark Kenyan solar plants
+            </p>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
+              Powering the nation, <span className="text-gradient-bridge">megawatt by megawatt</span>.
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              The utility-scale projects shaping Kenya's renewable energy future — and inspiring the work we do.
+            </p>
+          </motion.div>
+
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {KENYA_LANDMARKS.map((p, i) => (
+              <motion.article
+                key={p.title}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
+                whileHover={{ y: -6 }}
+                className="group rounded-3xl overflow-hidden bg-card shadow-soft hover:shadow-glow transition-all border border-border flex flex-col"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <img src={p.img} alt={p.title} loading="lazy" width={1280} height={832} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/70 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 glass rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1.5">
+                    <MapPin className="h-3 w-3 text-[color:var(--leaf-deep)]" /> {p.location}
+                  </div>
+                  <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[11px] font-semibold text-[color:var(--forest)]">
+                    <Zap className="h-3 w-3 text-[color:var(--sun-deep)]" /> {p.capacity}
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-semibold leading-tight">{p.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                  <div className="mt-5 flex gap-2.5 rounded-2xl border border-[color:var(--leaf-deep)]/20 bg-[color:var(--leaf-deep)]/5 p-3">
+                    <Sparkles className="h-4 w-4 shrink-0 text-[color:var(--leaf-deep)] mt-0.5" />
+                    <p className="text-xs text-foreground/85 leading-relaxed">{p.outcome}</p>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </section>
     </>
