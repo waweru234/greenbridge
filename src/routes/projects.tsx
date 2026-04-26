@@ -2,12 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { MapPin, Zap, Sparkles } from "lucide-react";
 import africa from "@/assets/project-africa.jpg";
-import uk from "@/assets/project-uk.jpg";
 import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
 import installTeam from "@/assets/uploads/install-team-roof.jpg";
 import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
 import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
 import siteInstall from "@/assets/uploads/site-installation.jpg";
+import nasho from "@/assets/uploads/nasho-irrigation.jpg";
+import windTurbine1 from "@/assets/uploads/wind-turbine-1.jpg";
+import securityLight from "@/assets/uploads/security-light.jpg";
+import homeLight from "@/assets/uploads/home-solar-light.jpg";
 
 
 export const Route = createFileRoute("/projects")({
@@ -44,15 +47,50 @@ const PROJECTS = [
   {
     img: solarBorehole,
     location: "Kisumu, Kenya",
-    title: "Off-Grid Rural Electrification",
+    title: "Off-Grid Rural Mini-Grid",
     capacity: "15 kW Solar Mini-Grid",
     desc: "A community-scale solar mini-grid bringing dependable, clean electricity to a previously off-grid rural area.",
     outcome: "Powered 120+ homes and small businesses, unlocking new income and education opportunities.",
     tag: "Greenbridge build",
   },
+  {
+    img: homeLight,
+    location: "UK & Kenya — Domestic",
+    title: "Solar Home Lighting Roll-out",
+    capacity: "Solar Lighting Kits",
+    desc: "Affordable solar home lighting kits replacing kerosene lamps and grid dependence — clean, safe and instant light for every room.",
+    outcome: "Brought reliable evening light to hundreds of homes — supporting study, safety and small home enterprise.",
+    tag: "Greenbridge build",
+  },
+  {
+    img: securityLight,
+    location: "Estates & Compounds",
+    title: "Solar Security Lighting",
+    capacity: "All-in-one Solar Floodlights",
+    desc: "Motion-activated solar security lights protecting compounds, schools, businesses and public spaces with zero running cost.",
+    outcome: "Improved community safety while removing grid and fuel costs entirely.",
+    tag: "Greenbridge build",
+  },
+  {
+    img: windTurbine1,
+    location: "Coastal Kenya",
+    title: "Hybrid Wind Power Generator",
+    capacity: "Small-scale Wind Turbines",
+    desc: "Small-scale wind turbines paired with solar to deliver round-the-clock generation in windy coastal and highland sites.",
+    outcome: "Boosted energy availability after sunset and during cloudy weeks — true 24/7 hybrid renewable power.",
+    tag: "Greenbridge build",
+  },
 ];
 
 const KENYA_LANDMARKS = [
+  {
+    img: nasho,
+    location: "Eastern Province, Rwanda",
+    title: "Nasho Solar-Powered Irrigation Project",
+    capacity: "Solar Irrigation",
+    desc: "A landmark agricultural project in Rwanda's Eastern Province using solar technology to power irrigation across thousands of hectares of farmland.",
+    outcome: "Powers irrigation for over 2,000 farmers — boosting food security, yields and rural livelihoods.",
+  },
   {
     img: africa,
     location: "Garissa, Kenya",
@@ -139,17 +177,17 @@ function ProjectsPage() {
             className="max-w-3xl"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
-              Landmark Kenyan solar plants
+              Landmark African solar projects
             </p>
             <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
-              Powering the nation, <span className="text-gradient-bridge">megawatt by megawatt</span>.
+              Powering the continent, <span className="text-gradient-bridge">megawatt by megawatt</span>.
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              The utility-scale projects shaping Kenya's renewable energy future — and inspiring the work we do.
+              The flagship utility-scale and agricultural solar projects shaping Africa's renewable future — and inspiring the work we do.
             </p>
           </motion.div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {KENYA_LANDMARKS.map((p, i) => (
               <motion.article
                 key={p.title}

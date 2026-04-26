@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Clock, Link2 } from "lucide-react";
-import team from "@/assets/about-team.jpg";
+import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Clock, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
+
 import jimsley from "@/assets/leader-jimsley.jpg";
+import story1 from "@/assets/uploads/story-1.jpg";
+import story2 from "@/assets/uploads/story-2.jpg";
+import story3 from "@/assets/uploads/story-3.jpg";
+import story4 from "@/assets/uploads/story-4.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -22,7 +26,7 @@ const LEADERS = [
     role: "Founder & Director",
     photo: jimsley,
     creds: ["PhD, Mechanical Engineering", "Energy Systems & Infrastructure"],
-    bio: "Jimsley brings deep technical expertise in energy systems, infrastructure and business development, with a strategic vision to bridge clean-energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to reliable, affordable clean energy across Africa.",
+    bio: "PhD Mechanical Engineer with experience in energy systems, infrastructure, and business development. Jimsley brings a strong technical background and a strategic vision to bridge energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to clean energy across Africa.",
   },
 ];
 
@@ -57,37 +61,64 @@ function AboutPage() {
             A bridge built from <span className="text-gradient-bridge">sun, wind & purpose</span>.
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Greenbridge Energy Limited is a renewable energy company connecting British engineering excellence with Africa's vast solar and wind potential — accelerating the journey to a zero-carbon future on both continents.
+            Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions — operating between the UK and Africa to bridge the energy gap with modern, sustainable technology.
           </motion.p>
         </div>
       </section>
 
-      {/* Story */}
+      {/* About Us — narrative */}
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 grid gap-10 md:grid-cols-2 items-center">
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="rounded-[2rem] overflow-hidden shadow-glow">
-            <img src={team} alt="Greenbridge engineering team" className="w-full h-[460px] object-cover" loading="lazy" width={1280} height={832} />
+        <div className="mx-auto max-w-7xl px-6 grid gap-12 md:grid-cols-2 items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-3">
+              <img src={story1} alt="Solar installation in progress" className="rounded-2xl shadow-soft w-full h-56 object-cover" loading="lazy" />
+              <img src={story2} alt="Wind power generation" className="rounded-2xl shadow-soft w-full h-56 object-cover mt-8" loading="lazy" />
+              <img src={story3} alt="Community solar lighting" className="rounded-2xl shadow-soft w-full h-56 object-cover -mt-4" loading="lazy" />
+              <img src={story4} alt="Engineering team on site" className="rounded-2xl shadow-soft w-full h-56 object-cover mt-4" loading="lazy" />
+            </div>
+            <motion.div
+              className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-[color:var(--sun)] blur-3xl opacity-40 -z-10"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
           </motion.div>
           <div>
-            <h2 className="text-4xl font-semibold">Our story</h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Founded by engineers who saw two worlds — one rich in clean-tech know-how, the other rich in untapped renewable potential — Greenbridge exists to close that gap.
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">About us</p>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">Two continents. <span className="text-gradient-bridge">One energy story.</span></h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed text-[1.02rem]">
+              Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions. Operating between the UK and Africa, we specialize in designing and deploying systems that address both advanced energy efficiency needs and energy access challenges.
             </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              We work hand-in-hand with local communities, governments and industrial partners to deliver renewable systems that don't just generate megawatts, but generate jobs, savings and lasting change.
+            <p className="mt-4 text-muted-foreground leading-relaxed text-[1.02rem]">
+              In the UK, we provide compliant, high-quality solar installations for residential and commercial clients. In Africa, we focus on off-grid and hybrid systems that bring reliable electricity to underserved communities and businesses.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed text-[1.02rem]">
+              Our approach combines engineering expertise, global partnerships, and a strong commitment to sustainability — turning sunshine and wind into power, opportunity and lasting change.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mission / Vision / Values */}
+      {/* Mission & Vision */}
       <section className="py-20 bg-gradient-soft">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2">
             {[
-              { Icon: Target, t: "Mission", d: "To accelerate the global energy transition by delivering reliable, affordable renewable solutions across the UK and Africa." },
-              { Icon: Eye, t: "Vision", d: "A world where every home, business and community is powered by clean, abundant, locally-generated energy." },
-              { Icon: Heart, t: "Values", d: "Integrity in engineering. Respect for community. Relentless focus on long-term, measurable impact." },
+              {
+                Icon: Target,
+                t: "Mission Statement",
+                d: "Greenbridge Energy Limited is committed to delivering reliable, affordable, and sustainable energy solutions across the United Kingdom and Africa. We bridge the energy gap by deploying modern renewable technologies that empower communities, support businesses, and accelerate the transition to a low-carbon future.",
+              },
+              {
+                Icon: Eye,
+                t: "Vision",
+                d: "To become a leading cross-continental renewable energy company, transforming how energy is generated, distributed, and consumed in emerging and developed markets.",
+              },
             ].map(({ Icon, t, d }, i) => (
               <motion.div
                 key={t}
@@ -95,15 +126,49 @@ function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="rounded-3xl bg-card p-8 shadow-soft"
+                className="rounded-3xl bg-card p-8 md:p-10 shadow-soft hover:shadow-glow transition-shadow"
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-bridge text-white shadow-sun">
-                  <Icon className="h-6 w-6" />
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-bridge text-white shadow-sun">
+                  <Icon className="h-7 w-7" />
                 </div>
-                <h3 className="mt-5 text-2xl font-semibold">{t}</h3>
-                <p className="mt-3 text-muted-foreground leading-relaxed">{d}</p>
+                <h3 className="mt-5 text-3xl font-semibold">{t}</h3>
+                <p className="mt-4 text-muted-foreground leading-relaxed text-[1.02rem]">{d}</p>
               </motion.div>
             ))}
+          </div>
+
+          {/* Core Values */}
+          <div className="mt-16">
+            <div className="text-center max-w-2xl mx-auto">
+              <Heart className="h-9 w-9 mx-auto text-[color:var(--leaf-deep)]" />
+              <h3 className="mt-3 text-3xl md:text-4xl font-semibold">Our Core Values</h3>
+              <p className="mt-3 text-muted-foreground">The five principles guiding every project we deliver.</p>
+            </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {[
+                { Icon: Leaf, t: "Sustainability", d: "Engineering for the planet, not just the project." },
+                { Icon: Lightbulb, t: "Innovation", d: "Smarter systems, better outcomes." },
+                { Icon: ShieldCheck, t: "Integrity", d: "Honest engineering and transparent delivery." },
+                { Icon: HandHeart, t: "Accessibility", d: "Clean energy within reach of every community." },
+                { Icon: Sparkles, t: "Impact-driven", d: "Solutions measured by the change they create." },
+              ].map((v, i) => (
+                <motion.div
+                  key={v.t}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className="rounded-2xl bg-card p-5 shadow-soft hover:shadow-glow transition-all border border-border"
+                >
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-bridge text-white shadow-sun">
+                    <v.Icon className="h-5 w-5" />
+                  </div>
+                  <h4 className="mt-3 font-semibold">{v.t}</h4>
+                  <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{v.d}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
