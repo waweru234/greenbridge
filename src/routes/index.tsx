@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform, useInView, useMotionValue, animate } f
 import { useEffect, useRef } from "react";
 import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
-import projectUk from "@/assets/project-uk.jpg";
-import projectInstall from "@/assets/project-install.jpg";
-import projectAfrica from "@/assets/project-africa.jpg";
+import projectUk from "@/assets/uploads/ground-mount-residential.jpg";
+import projectInstall from "@/assets/uploads/install-team-roof.jpg";
+import projectAfrica from "@/assets/uploads/solar-borehole.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
