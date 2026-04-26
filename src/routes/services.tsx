@@ -2,26 +2,27 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  Sun, Wind, Battery, Cpu, HardHat, LineChart, ArrowRight, Check, ZoomIn,
+  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn,
 } from "lucide-react";
 import solarImg from "@/assets/service-solar.jpg";
-import windImg from "@/assets/service-wind.jpg";
 import batteryImg from "@/assets/service-battery.jpg";
 import microgridImg from "@/assets/service-microgrid.jpg";
 import epcImg from "@/assets/service-epc.jpg";
 import advisoryImg from "@/assets/service-advisory.jpg";
 import solar2 from "@/assets/gallery/solar-2.jpg";
 import solar3 from "@/assets/gallery/solar-3.jpg";
-import wind2 from "@/assets/gallery/wind-2.jpg";
-import wind3 from "@/assets/gallery/wind-3.jpg";
 import battery2 from "@/assets/gallery/battery-2.jpg";
 import battery3 from "@/assets/gallery/battery-3.jpg";
 import microgrid2 from "@/assets/gallery/microgrid-2.jpg";
 import microgrid3 from "@/assets/gallery/microgrid-3.jpg";
-import epc2 from "@/assets/gallery/epc-2.jpg";
-import epc3 from "@/assets/gallery/epc-3.jpg";
-import advisory2 from "@/assets/gallery/advisory-2.jpg";
-import advisory3 from "@/assets/gallery/advisory-3.jpg";
+// Real field photos from Greenbridge installations
+import installTeam from "@/assets/uploads/install-team-roof.jpg";
+import installerPortrait from "@/assets/uploads/installer-portrait.png";
+import solarBorehole from "@/assets/uploads/solar-borehole.jpg";
+import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
+import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
+import inverterPanel from "@/assets/uploads/inverter-control-panel.jpg";
+import siteInstall from "@/assets/uploads/site-installation.jpg";
 import { Lightbox, type LightboxImage } from "@/components/Lightbox";
 
 export const Route = createFileRoute("/services")({
@@ -52,122 +53,111 @@ interface Service {
 const SERVICES: Service[] = [
   {
     Icon: Sun,
-    title: "Solar PV Systems",
-    tagline: "Turn sunlight into bankable, long-term energy assets.",
+    title: "Solar PV Installation",
+    tagline: "Turn sunlight into bankable, long-term energy assets — UK & Africa.",
     description:
-      "From utility-scale solar farms feeding the national grid to commercial rooftops slashing factory bills and off-grid kits powering remote villages, our solar PV solutions are engineered for the climates we work in. We handle site assessment, panel selection, mounting design, inverter sizing, grid interconnection and 25+ year performance monitoring — so every kilowatt-hour of sunshine becomes a measurable return.",
+      "From rooftop residential systems in the UK to ground-mounted commercial arrays across East Africa, our solar PV installations are engineered for the climate they serve. We handle everything: site assessment, panel selection, mounting design, inverter sizing, grid interconnection (G99 in the UK) and 25+ year performance monitoring — so every kilowatt-hour of sunshine becomes a measurable return.",
     benefits: [
       "Up to 60% reduction in energy costs within year one",
       "25-year performance warranties on tier-1 panels",
-      "Bifacial & tracker designs for 15-25% extra yield",
+      "Bifacial designs for 15-25% extra yield",
       "Real-time monitoring via mobile dashboard",
     ],
-    useCases: ["Utility solar farms", "Industrial rooftops", "Rural electrification", "Solar-powered water pumping"],
-    image: solarImg,
+    useCases: ["UK residential rooftops", "Commercial rooftops", "Ground-mount arrays", "Solar-powered water pumping"],
+    image: installTeam,
     gallery: [
-      { src: solarImg, caption: "Utility-scale solar farm at golden hour — capturing peak yield." },
-      { src: solar2, caption: "High-efficiency monocrystalline cells engineered for harsh climates." },
-      { src: solar3, caption: "Commercial rooftop installation — turning unused space into revenue." },
-    ],
-  },
-  {
-    Icon: Wind,
-    title: "Wind Energy",
-    tagline: "Harness consistent, high-yield power from the wind.",
-    description:
-      "Wind complements solar perfectly — generating most when the sun isn't shining. We design and deliver onshore wind turbines and hybrid solar-wind plants tailored to local wind regimes. From wind resource assessment using on-site met masts to turbine selection, foundation engineering and grid integration, we build wind assets that deliver 30+ years of low-maintenance, high-availability power.",
-    benefits: [
-      "Capacity factors of 35-45% in optimal sites",
-      "Hybrid solar-wind designs for 24-hour generation",
-      "Lower LCOE than diesel within 3-5 years",
-      "Minimal land footprint — farming continues underneath",
-    ],
-    useCases: ["Onshore wind farms", "Hybrid solar-wind plants", "Industrial self-generation", "Coastal & highland sites"],
-    image: windImg,
-    gallery: [
-      { src: windImg, caption: "Highland wind farm at sunrise — consistent prevailing winds year-round." },
-      { src: wind2, caption: "Modern 4 MW turbines with 80m+ blade spans for maximum sweep area." },
-      { src: wind3, caption: "Coastal wind farm at dusk — high capacity factors near the shoreline." },
+      { src: installTeam, caption: "Our installation crew mounting a commercial rooftop array in East Africa." },
+      { src: roofCloseup, caption: "Tier-1 monocrystalline panels installed across a long pitched roof." },
+      { src: groundMount, caption: "Ground-mount residential array engineered for maximum yield and shade-free siting." },
+      { src: siteInstall, caption: "Multi-day install in progress — frame, racking and panels going up." },
+      { src: installerPortrait, caption: "A Greenbridge engineer commissioning a freshly mounted module." },
+      { src: solarImg, caption: "Utility-scale solar array at golden hour — capturing peak generation." },
+      { src: solar2, caption: "High-efficiency cells engineered for harsh African sun." },
+      { src: solar3, caption: "Commercial rooftop install — turning unused space into revenue." },
     ],
   },
   {
     Icon: Battery,
-    title: "Battery Energy Storage",
+    title: "Battery Storage Solutions",
     tagline: "Store the sun. Smooth the grid. Power the night.",
     description:
-      "Battery storage is the missing piece that makes renewables truly 24/7. We deploy lithium-ion BESS for grid-scale energy shifting, commercial peak-shaving, and flow batteries for long-duration storage. Our systems include intelligent battery management, fire suppression, thermal control, and grid-forming inverters that can black-start an entire network.",
+      "Battery storage is the missing piece that makes solar truly 24/7. We deploy lithium-ion BESS for residential backup, commercial peak-shaving, and hybrid solar+battery systems that keep the lights on through grid outages. Our installations include intelligent battery management, fire suppression, thermal control and grid-tie inverters certified for UK and African networks.",
     benefits: [
       "Shift midday solar to evening peak demand",
       "Replace diesel backup with silent, zero-emission power",
-      "Provide grid services: frequency, voltage, reserve",
-      "Modular: scale from 100 kWh to 100+ MWh",
+      "Modular: scale from 5 kWh home backup to 1+ MWh",
+      "Seamless changeover during grid blackouts",
     ],
-    useCases: ["Grid-scale BESS", "Commercial peak-shaving", "Backup & UPS replacement", "Microgrid storage core"],
+    useCases: ["Residential backup", "Commercial peak-shaving", "Hybrid solar+storage", "UPS replacement"],
     image: batteryImg,
     gallery: [
-      { src: batteryImg, caption: "Containerised BESS deployed alongside a solar plant for evening dispatch." },
-      { src: battery2, caption: "Inside the container — modular lithium-ion racks with full BMS monitoring." },
-      { src: battery3, caption: "Field engineer commissioning a commercial peak-shaving battery system." },
+      { src: batteryImg, caption: "Lithium-ion BESS deployed alongside a solar plant for evening dispatch." },
+      { src: battery2, caption: "Modular battery racks with full BMS monitoring and thermal control." },
+      { src: battery3, caption: "Field engineer commissioning a commercial peak-shaving system." },
+      { src: inverterPanel, caption: "Hybrid inverter and battery control gear neatly installed at a Kenyan site." },
     ],
   },
   {
     Icon: Cpu,
-    title: "Microgrids & Smart Grid",
-    tagline: "Intelligent energy networks that work even when the grid fails.",
+    title: "Off-Grid & Hybrid Systems",
+    tagline: "24/7 reliable power for off-grid communities — Africa focus.",
     description:
-      "A microgrid is a self-contained energy system — solar, wind, batteries, and (if needed) backup generators — coordinated by smart controls that balance supply and demand in real time. We design microgrids for villages, university campuses, mines, hospitals, and industrial parks. They can run grid-tied or fully islanded, and pay for themselves in 4-7 years compared to grid extension or diesel.",
+      "A hybrid system is a self-contained energy network — solar, batteries and (if needed) backup generators — coordinated by smart controls that balance supply and demand in real time. We design off-grid and hybrid systems for villages, clinics, lodges and farms across Africa. They run fully islanded or grid-tied, and pay for themselves in 4-7 years versus diesel or grid extension.",
     benefits: [
       "Energy independence with islanded operation",
-      "AI-driven load balancing & predictive dispatch",
+      "Smart load balancing & predictive dispatch",
       "Remote monitoring from anywhere in the world",
       "Future-proof: add capacity as demand grows",
     ],
-    useCases: ["Rural village microgrids", "Campus & hospital networks", "Mining & industrial sites", "Island & remote communities"],
+    useCases: ["Rural village systems", "Clinics & schools", "Lodges & farms", "Telecom & remote sites"],
     image: microgridImg,
     gallery: [
-      { src: microgridImg, caption: "24/7 control room — operators monitoring microgrid performance live." },
-      { src: microgrid2, caption: "A village transformed: solar microgrid delivers light and safety after dark." },
-      { src: microgrid3, caption: "Smart grid orchestration — AI balancing solar, wind, batteries and load." },
+      { src: solarBorehole, caption: "Off-grid solar powering a community borehole and water tank in rural Kenya." },
+      { src: microgridImg, caption: "Control room — operators monitoring hybrid system performance live." },
+      { src: microgrid2, caption: "A village transformed: hybrid solar delivers light and safety after dark." },
+      { src: microgrid3, caption: "Smart controllers balancing solar, batteries and backup load." },
+      { src: inverterPanel, caption: "Inverter and switchgear cabinet at a hybrid off-grid installation." },
     ],
   },
   {
-    Icon: HardHat,
-    title: "EPC & Installation",
-    tagline: "One contract. One team. End-to-end delivery.",
+    Icon: Building2,
+    title: "Commercial & Industrial Energy Solutions",
+    tagline: "Cut bills, cut diesel, cut carbon — at C&I scale.",
     description:
-      "Engineering, Procurement and Construction (EPC) is where vision meets reality. We take single-point responsibility for the entire build — detailed engineering, equipment procurement, civil works, mechanical & electrical installation, testing, commissioning, and handover. Our crews are trained to international HSE standards and deliver on-time, on-budget, on-spec across the UK and Africa.",
+      "Turnkey solar and storage for factories, hotels, agribusinesses, lodges and warehouses. We take single-point responsibility for the entire build — engineering, procurement, civil works, electrical installation, testing, commissioning and handover. Our crews are trained to international HSE standards and deliver on-time, on-budget across the UK and Africa.",
     benefits: [
       "Single point of accountability — no finger-pointing",
       "Fixed-price, fixed-timeline contracts available",
+      "Slash diesel generator runtime by 60-90%",
       "International-standard HSE & quality management",
-      "Local workforce training & job creation",
     ],
-    useCases: ["Turnkey solar plants", "Wind farm construction", "BESS installation", "Grid interconnection works"],
+    useCases: ["Factories & warehouses", "Hotels & lodges", "Agribusinesses", "Cold storage & processing"],
     image: epcImg,
     gallery: [
       { src: epcImg, caption: "Site engineers performing final QA on a commercial PV install." },
-      { src: epc2, caption: "Mounting structures and panel rows going down on a utility-scale build." },
-      { src: epc3, caption: "Electrical commissioning of inverter and combiner cabinets." },
+      { src: installTeam, caption: "Full installation crew delivering a commercial rooftop project." },
+      { src: siteInstall, caption: "Mounting structures and panel rows going up on a C&I build." },
+      { src: inverterPanel, caption: "Electrical commissioning of inverter and combiner cabinets." },
     ],
   },
   {
     Icon: LineChart,
-    title: "Energy Advisory & Consulting",
-    tagline: "Strategy, finance and policy for the energy transition.",
+    title: "Energy Consultation & System Design",
+    tagline: "Independent feasibility, sizing and bankable design.",
     description:
-      "Before a single panel is mounted, the right strategy must be in place. Our advisory team supports governments, developers, banks and corporates with feasibility studies, technical due diligence, financial modelling, PPA structuring, carbon strategy and policy advice. We help you de-risk decisions, attract investment and align with global standards like IFC Performance Standards and the SDGs.",
+      "Before a single panel is mounted, the right design must be in place. Our advisory team supports homeowners, businesses and developers with feasibility studies, system sizing, financial modelling, payback analysis and bankable engineering drawings. We help you de-risk decisions and choose the right technology mix for your site, climate and budget.",
     benefits: [
-      "Bankable feasibility studies for project finance",
-      "Independent technical due diligence for investors",
-      "Carbon credits & ESG reporting frameworks",
-      "Policy & regulatory advisory for governments",
+      "Bankable feasibility studies",
+      "Independent system sizing & technology selection",
+      "Payback analysis & financial modelling",
+      "Tender-ready engineering drawings",
     ],
-    useCases: ["Project feasibility", "Investor due diligence", "Net-zero roadmaps", "PPA & tariff design"],
+    useCases: ["Homeowner advisory", "Business feasibility", "Investor due diligence", "Tender & PPA design"],
     image: advisoryImg,
     gallery: [
       { src: advisoryImg, caption: "Boardroom briefing — translating energy data into investor-ready insight." },
-      { src: advisory2, caption: "Multi-disciplinary advisory team co-designing a bankable project." },
-      { src: advisory3, caption: "Live financial modelling on-site at a candidate solar development." },
+      { src: installerPortrait, caption: "On-site assessment by a Greenbridge consulting engineer." },
+      { src: roofCloseup, caption: "Field measurement of an existing roof for accurate system sizing." },
     ],
   },
 ];
