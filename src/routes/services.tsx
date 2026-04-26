@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn,
+  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn, Lightbulb, Wind,
 } from "lucide-react";
 import solarImg from "@/assets/service-solar.jpg";
 import batteryImg from "@/assets/service-battery.jpg";
@@ -23,6 +23,11 @@ import roofCloseup from "@/assets/uploads/roof-panels-closeup.jpg";
 import groundMount from "@/assets/uploads/ground-mount-residential.jpg";
 import inverterPanel from "@/assets/uploads/inverter-control-panel.jpg";
 import siteInstall from "@/assets/uploads/site-installation.jpg";
+import homeLight from "@/assets/uploads/home-solar-light.jpg";
+import securityLight from "@/assets/uploads/security-light.jpg";
+import solarStreet from "@/assets/uploads/solar-street-light.jpg";
+import windTurbine1 from "@/assets/uploads/wind-turbine-1.jpg";
+import windTurbine2 from "@/assets/uploads/wind-turbine-2.jpg";
 import { Lightbox, type LightboxImage } from "@/components/Lightbox";
 
 export const Route = createFileRoute("/services")({
