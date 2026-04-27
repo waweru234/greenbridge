@@ -63,9 +63,76 @@ function ContactPage() {
         </div>
       </section>
 
+      {/* Office Cards */}
       <section className="py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">Our Offices</p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-semibold">Two continents. <span className="text-gradient-bridge">One mission.</span></h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              {
+                flag: "🇬🇧",
+                region: "United Kingdom Office",
+                company: "Greenbridge Energy Limited",
+                address: ["34 Lullington Close", "Manchester, M22 1LY", "England"],
+                phone: "+44 7349 013628",
+                accent: "from-[#1a3a8f] via-[#2456b8] to-[#cf142b]",
+              },
+              {
+                flag: "🇰🇪",
+                region: "Kenya Office — Africa Operations Hub",
+                company: "Triomah Solution Ltd (Partner Office)",
+                address: ["Mombasa Road – Beijing Road", "P.O. Box 871-00241", "Nairobi, Kenya"],
+                phone: "+254 723 363636",
+                accent: "from-[#006600] via-[#000000] to-[#bb0000]",
+              },
+            ].map((o) => (
+              <motion.div
+                key={o.region}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                whileHover={{ y: -6 }}
+                className="group relative overflow-hidden rounded-3xl bg-card shadow-soft hover:shadow-glow transition-shadow"
+              >
+                <div className={`h-2 w-full bg-gradient-to-r ${o.accent}`} />
+                <div className="p-7 md:p-8">
+                  <div className="flex items-center gap-3">
+                    <span className="text-4xl leading-none">{o.flag}</span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{o.region}</p>
+                      <h3 className="text-xl font-semibold">{o.company}</h3>
+                    </div>
+                  </div>
+                  <div className="mt-6 space-y-3">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-bridge text-white shadow-sun shrink-0">
+                        <MapPin className="h-4 w-4" />
+                      </span>
+                      <div className="text-sm leading-relaxed">
+                        {o.address.map((l) => <div key={l}>{l}</div>)}
+                      </div>
+                    </div>
+                    <a href={`tel:${o.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-secondary/40 p-3 hover:bg-secondary transition-colors">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-bridge text-white shadow-sun shrink-0">
+                        <Phone className="h-4 w-4" />
+                      </span>
+                      <span className="font-semibold tracking-wide">{o.phone}</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-16">
         <div className="mx-auto max-w-6xl px-6 grid gap-10 md:grid-cols-5">
-          {/* Info */}
+          {/* Email card */}
           <motion.aside
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -73,19 +140,19 @@ function ContactPage() {
             transition={{ duration: 0.6 }}
             className="md:col-span-2 space-y-6"
           >
-            {[
-              { Icon: MapPin, t: "Offices", d: "London, United Kingdom\nNairobi, Kenya" },
-              { Icon: Phone, t: "Phone", d: "+44 20 0000 0000\n+254 700 000 000" },
-              { Icon: Mail, t: "Email", d: "hello@greenbridge-energy.com" },
-            ].map(({ Icon, t, d }) => (
-              <div key={t} className="rounded-3xl bg-card p-6 shadow-soft">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-bridge text-white shadow-sun">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 font-semibold">{t}</h3>
-                <p className="mt-1 text-muted-foreground whitespace-pre-line text-sm">{d}</p>
-              </div>
-            ))}
+            <div className="rounded-3xl bg-gradient-bridge p-7 text-white shadow-glow">
+              <Mail className="h-6 w-6" />
+              <h3 className="mt-4 text-lg font-semibold">Email us anytime</h3>
+              <p className="mt-1 text-white/85 text-sm">We typically respond within one business day.</p>
+              <a href="mailto:hello@greenbridge-energy.com" className="mt-4 inline-block font-semibold underline-offset-4 hover:underline">
+                hello@greenbridge-energy.com
+              </a>
+            </div>
+            <div className="rounded-3xl bg-card p-7 shadow-soft">
+              <h3 className="font-semibold">Office hours</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Mon – Fri · 09:00 – 18:00 (local time)</p>
+              <p className="mt-1 text-sm text-muted-foreground">Emergency support available 24/7 for active projects.</p>
+            </div>
           </motion.aside>
 
           {/* Form */}
