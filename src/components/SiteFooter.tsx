@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export function SiteFooter() {
@@ -53,7 +53,11 @@ export function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
-              <span>hello@greenbridge-energy.com</span>
+              <a href="mailto:greenbridgegy@outlook.com" className="hover:text-white">greenbridgegy@outlook.com</a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Instagram className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
+              <a href="https://instagram.com/greenbridgeenergyltd" target="_blank" rel="noopener noreferrer" className="hover:text-white">@greenbridgeenergyltd</a>
             </li>
           </ul>
         </div>
