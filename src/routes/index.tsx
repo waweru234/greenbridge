@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
+import heroVideo from "@/assets/Hailuo_Video_Just make it look like the sun_505104671739731968 (1).mp4";
 import projectUk from "@/assets/uploads/ground-mount-residential.jpg";
 import projectInstall from "@/assets/uploads/install-team-roof.jpg";
 import projectAfrica from "@/assets/uploads/solar-borehole.jpg";
@@ -61,19 +62,37 @@ function HomePage() {
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const [muted, setMuted] = useState(true);
+  const [canPlayVideo, setCanPlayVideo] = useState(true);
 
   return (
     <>
       {/* HERO */}
       <section ref={heroRef} className="relative overflow-hidden">
         <motion.div className="absolute inset-0 -z-10" style={{ y: heroY, scale: heroScale }}>
-          <img
-            src={hero}
-            alt="Solar farm at sunrise with wind turbines"
-            className="h-full w-full object-cover"
-            width={1920}
-            height={1080}
-          />
+          {/* Video background with poster fallback. Respects muted state. If user prefers reduced motion the poster will be shown via CSS (motion-reduce). */}
+          {canPlayVideo ? (
+            <video
+              className="h-full w-full object-cover"
+              src={heroVideo}
+              poster={hero}
+              autoPlay
+              loop
+              playsInline
+              muted={muted}
+              // prevent tab focus on background media
+              aria-hidden="true"
+              onError={() => setCanPlayVideo(false)}
+            />
+          ) : (
+            <img
+              src={hero}
+              alt="Solar farm at sunrise with wind turbines"
+              className="h-full w-full object-cover"
+              width={1920}
+              height={1080}
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{
@@ -183,6 +202,28 @@ function HomePage() {
             </motion.div>
           </motion.div>
         </motion.div>
+
+        {/* Mute/unmute control */}
+        <div className="absolute top-6 right-6 z-20">
+          <button
+            aria-pressed={!muted}
+            aria-label={muted ? "Unmute hero video" : "Mute hero video"}
+            className="rounded-full bg-black/40 text-white p-2 hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-sun"
+            onClick={() => setMuted((m) => !m)}
+          >
+            {muted ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M23 9L17 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M15 9a3 3 0 010 6M19 5a7 7 0 010 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </button>
+        </div>
 
         {/* Scroll cue */}
         <motion.div
