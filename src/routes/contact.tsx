@@ -51,8 +51,10 @@ function ContactPage() {
 
   return (
     <>
-      <section className="py-20 md:py-24 bg-gradient-soft">
-        <div className="mx-auto max-w-5xl px-6 text-center">
+      <section className="relative py-20 md:py-24 bg-gradient-soft overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -top-20 -left-16 h-72 w-72 rounded-full bg-[color:var(--sun)]/20 blur-3xl animate-float" />
+        <div aria-hidden className="pointer-events-none absolute top-10 -right-10 h-80 w-80 rounded-full bg-[color:var(--leaf-deep)]/15 blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">Contact</p>
           <h1 className="mt-4 text-5xl md:text-6xl font-semibold leading-tight">
             Let's <span className="text-gradient-bridge">power what's next</span>.
@@ -140,14 +142,34 @@ function ContactPage() {
             transition={{ duration: 0.6 }}
             className="md:col-span-2 space-y-6"
           >
-            <div className="rounded-3xl bg-gradient-bridge p-7 text-white shadow-glow">
-              <Mail className="h-6 w-6" />
-              <h3 className="mt-4 text-lg font-semibold">Email us anytime</h3>
-              <p className="mt-1 text-white/85 text-sm">We typically respond within one business day.</p>
-              <a href="mailto:hello@greenbridge-energy.com" className="mt-4 inline-block font-semibold underline-offset-4 hover:underline">
-                hello@greenbridge-energy.com
+            <div className="rounded-3xl bg-gradient-bridge p-7 text-white shadow-glow relative overflow-hidden">
+              <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-white/15 blur-2xl animate-pulse" />
+              <Mail className="h-6 w-6 relative" />
+              <h3 className="mt-4 text-lg font-semibold relative">Email us anytime</h3>
+              <p className="mt-1 text-white/85 text-sm relative">We typically respond within one business day.</p>
+              <a href="mailto:greenbridgegy@outlook.com" className="mt-4 inline-block font-semibold underline-offset-4 hover:underline relative">
+                greenbridgegy@outlook.com
               </a>
             </div>
+            <a
+              href="https://instagram.com/greenbridgeenergyltd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-3xl p-7 text-white shadow-glow relative overflow-hidden group"
+              style={{ background: "linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)" }}
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-white/10" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 relative">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              <h3 className="mt-4 text-lg font-semibold relative">Follow us on Instagram</h3>
+              <p className="mt-1 text-white/90 text-sm relative">See projects, behind-the-scenes & impact stories.</p>
+              <span className="mt-4 inline-block font-semibold underline-offset-4 group-hover:underline relative">
+                @greenbridgeenergyltd →
+              </span>
+            </a>
             <div className="rounded-3xl bg-card p-7 shadow-soft">
               <h3 className="font-semibold">Office hours</h3>
               <p className="mt-2 text-sm text-muted-foreground">Mon – Fri · 09:00 – 18:00 (local time)</p>
