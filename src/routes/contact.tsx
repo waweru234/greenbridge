@@ -51,8 +51,10 @@ function ContactPage() {
 
   return (
     <>
-      <section className="py-20 md:py-24 bg-gradient-soft">
-        <div className="mx-auto max-w-5xl px-6 text-center">
+      <section className="relative py-20 md:py-24 bg-gradient-soft overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -top-20 -left-16 h-72 w-72 rounded-full bg-[color:var(--sun)]/20 blur-3xl animate-float" />
+        <div aria-hidden className="pointer-events-none absolute top-10 -right-10 h-80 w-80 rounded-full bg-[color:var(--leaf-deep)]/15 blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
+        <div className="relative mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">Contact</p>
           <h1 className="mt-4 text-5xl md:text-6xl font-semibold leading-tight">
             Let's <span className="text-gradient-bridge">power what's next</span>.
