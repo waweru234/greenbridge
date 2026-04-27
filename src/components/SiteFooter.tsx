@@ -34,15 +34,25 @@ export function SiteFooter() {
           </h4>
           <ul className="mt-4 space-y-3 text-sm text-white/75">
             <li className="flex items-start gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 text-[color:var(--sun)]" />
-              <span>London, United Kingdom · Nairobi, Kenya</span>
+              <MapPin className="h-4 w-4 mt-0.5 text-[color:var(--sun)] shrink-0" />
+              <span>
+                <span className="block text-white/95 font-medium">🇬🇧 Manchester, UK</span>
+                34 Lullington Close, M22 1LY
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <MapPin className="h-4 w-4 mt-0.5 text-[color:var(--sun)] shrink-0" />
+              <span>
+                <span className="block text-white/95 font-medium">🇰🇪 Nairobi, Kenya</span>
+                Mombasa Rd – Beijing Rd · P.O. Box 871-00241
+              </span>
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-[color:var(--sun)]" />
-              <span>+44 20 0000 0000 · +254 700 000 000</span>
+              <Phone className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
+              <span>+44 7349 013628 · +254 723 363636</span>
             </li>
             <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-[color:var(--sun)]" />
+              <Mail className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
               <span>hello@greenbridge-energy.com</span>
             </li>
           </ul>
