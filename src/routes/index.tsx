@@ -3,7 +3,9 @@ import { motion, useScroll, useTransform, useInView, useMotionValue, animate } f
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
-import heroVideo from "@/assets/Hailuo_Video_Just make it look like the sun_505104671739731968 (1).mp4";
+import heroVideo from "@/assets/Hailuo_Video_Just make it look like the sun_505142339831885827.mp4";
+import aerialSolarVideo from "@/assets/new ones/stock-footage-aerial-drone-view-into-large-solar-panels-at-a-solar-farm-at-bright-sunset-solar-cell-power-plants.mp4";
+import waterFlowVideo from "@/assets/new ones/stock-footage-water-flows-from-a-solar-powered-tubewell-beside-solar-panels-used-for-irrigating-nearby-farmland.mp4";
 import projectUk from "@/assets/uploads/ground-mount-residential.jpg";
 import projectInstall from "@/assets/uploads/install-team-roof.jpg";
 import projectAfrica from "@/assets/uploads/solar-borehole.jpg";
@@ -62,8 +64,36 @@ function HomePage() {
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const [muted, setMuted] = useState(true);
   const [canPlayVideo, setCanPlayVideo] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+
+  // keep the hero muted by default for autoplay compatibility
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.muted = true;
+  }, []);
+
+  // Try to start playback programmatically; if browser blocks autoplay, show a play control
+  useEffect(() => {
+    if (!videoRef.current || !canPlayVideo) return;
+    const vid = videoRef.current;
+    const playPromise = vid.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        setAutoplayBlocked(true);
+      });
+    }
+  }, [videoRef, canPlayVideo]);
+
+  function handleStartPlayback() {
+    if (!videoRef.current) return;
+    videoRef.current.play().then(() => {
+      setAutoplayBlocked(false);
+    }).catch(() => {
+      // still blocked, keep the control visible
+      setAutoplayBlocked(true);
+    });
+  }
 
   return (
     <>
@@ -73,33 +103,45 @@ function HomePage() {
           {/* Video background with poster fallback. Respects muted state. If user prefers reduced motion the poster will be shown via CSS (motion-reduce). */}
           {canPlayVideo ? (
             <video
+              ref={videoRef}
               className="h-full w-full object-cover"
               src={heroVideo}
+              preload="metadata"
               poster={hero}
               autoPlay
               loop
               playsInline
-              muted={muted}
+              muted={true}
               // prevent tab focus on background media
               aria-hidden="true"
               onError={() => setCanPlayVideo(false)}
+              onLoadedData={() => {
+                // debug hook: confirm video loaded
+                // eslint-disable-next-line no-console
+                console.log('Hero video loaded:', heroVideo);
+              }}
+              onPlay={() => {
+                // eslint-disable-next-line no-console
+                console.log('Hero video playing');
+              }}
             />
           ) : (
             <img
               src={hero}
               alt="Solar farm at sunrise with wind turbines"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover hero-fallback-poster"
               width={1920}
               height={1080}
             />
           )}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, color-mix(in oklab, var(--forest) 78%, transparent), color-mix(in oklab, var(--forest) 38%, transparent) 50%, var(--background))",
-            }}
-          />
+          <div className="absolute inset-0 hero-video-overlay" />
+
+          {/* Decorative overlays: color wash, vignette and animated light streak */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 hero-color-overlay" />
+            <div className="absolute inset-0 hero-vignette" />
+            <div className="absolute inset-0 hero-light-streak" />
+          </div>
           {/* sun glow */}
           <motion.div
             className="absolute top-24 right-10 h-72 w-72 rounded-full"
@@ -203,27 +245,7 @@ function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* Mute/unmute control */}
-        <div className="absolute top-6 right-6 z-20">
-          <button
-            aria-pressed={!muted}
-            aria-label={muted ? "Unmute hero video" : "Mute hero video"}
-            className="rounded-full bg-black/40 text-white p-2 hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-sun"
-            onClick={() => setMuted((m) => !m)}
-          >
-            {muted ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M23 9L17 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M15 9a3 3 0 010 6M19 5a7 7 0 010 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-          </button>
-        </div>
+        {/* mute control removed for a clean hero — video stays muted for autoplay */}
 
         {/* Scroll cue */}
         <motion.div
@@ -268,6 +290,85 @@ function HomePage() {
               )),
             )}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Energy in motion */}
+      <section className="py-20 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
+              Energy in motion
+            </p>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
+              Live project footage, <span className="text-gradient-bridge">real field conditions</span>.
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Aerial and on-ground video from solar and water projects to show how systems perform in real environments.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            <motion.article
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
+            >
+              <div className="relative">
+                <video
+                  src={aerialSolarVideo}
+                  className="w-full h-[280px] md:h-[420px] object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  aria-label="Aerial drone view of solar farm"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 text-white">
+                  <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Drone footage</p>
+                  <p className="text-lg md:text-2xl font-semibold">Utility-scale solar arrays at sunset</p>
+                </div>
+              </div>
+            </motion.article>
+
+            <motion.article
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
+            >
+              <div className="relative h-full min-h-[280px] md:min-h-[420px]">
+                <video
+                  src={waterFlowVideo}
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  aria-label="Water flowing from solar-powered tubewell"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 text-white pr-4">
+                  <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Field footage</p>
+                  <p className="text-base md:text-xl font-semibold leading-tight">Solar-powered tubewell irrigation in operation</p>
+                </div>
+              </div>
+            </motion.article>
+          </div>
         </div>
       </section>
 

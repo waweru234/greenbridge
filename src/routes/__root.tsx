@@ -36,13 +36,14 @@ export const Route = createRootRoute({
 function RootComponent() {
   const { location } = useRouterState();
   const isAdmin = location.pathname.startsWith("/admin") || location.pathname === "/auth";
+  const isHome = location.pathname === "/";
 
   return (
     <AuthProvider>
       <HeadContent />
       <div className="min-h-screen flex flex-col">
         {!isAdmin && <SiteHeader />}
-        <main className={`flex-1 ${isAdmin ? "" : "pt-20"}`}>
+        <main className={`flex-1 ${isAdmin ? "" : isHome ? "pt-0" : "pt-20"}`}>
           <Outlet />
         </main>
         {!isAdmin && <SiteFooter />}

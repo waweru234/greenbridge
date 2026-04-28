@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Clock, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
+import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
 
-import jimsley from "@/assets/leader-jimsley.jpg";
+import jimsley from "@/assets/jinsley Omari.png";
 import story1 from "@/assets/uploads/story-1.jpg";
 import story2 from "@/assets/uploads/story-2.jpg";
 import story3 from "@/assets/uploads/story-3.jpg";
 import story4 from "@/assets/uploads/story-4.jpg";
-
+import pumpOpsVideo from "@/assets/new ones/istockphoto-881095546-640_adpp_is.mp4";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -31,10 +31,10 @@ const LEADERS = [
 ];
 
 const CERTIFICATIONS = [
-  { name: "MCS", full: "Microgeneration Certification Scheme", region: "United Kingdom", status: "in-progress" },
-  { name: "RECC", full: "Renewable Energy Consumer Code", region: "United Kingdom", status: "in-progress" },
-  { name: "HIES", full: "Home Insulation & Energy Systems", region: "United Kingdom", status: "in-progress" },
-  { name: "Solar Energy UK", full: "Industry Membership", region: "United Kingdom", status: "in-progress" },
+  { name: "MCS", full: "Microgeneration Certification Scheme", region: "United Kingdom" },
+  { name: "RECC", full: "Renewable Energy Consumer Code", region: "United Kingdom" },
+  { name: "HIES", full: "Home Insulation & Energy Systems", region: "United Kingdom" },
+  { name: "Solar Energy UK", full: "Industry Membership", region: "United Kingdom" },
 ] as const;
 
 const TESTIMONIALS = [
@@ -54,14 +54,25 @@ function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-20 md:py-28 bg-gradient-soft">
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <video
+          src={pumpOpsVideo}
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/45 via-black/40 to-black/60" />
         <div className="mx-auto max-w-5xl px-6 text-center">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">About us</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 text-5xl md:text-6xl font-semibold leading-tight">
-            A bridge built from <span className="text-gradient-bridge">sun, wind & purpose</span>.
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-sm font-semibold uppercase tracking-wider text-white/85">About us</motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 text-5xl md:text-6xl font-semibold leading-tight text-white">
+            A bridge built from <span className="text-[color:var(--sun)]">sun, wind & purpose</span>.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions — operating between the UK and Africa to bridge the energy gap with modern, sustainable technology.
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-6 text-lg text-white/85 max-w-3xl mx-auto leading-relaxed">
+            Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions - operating between the UK and Africa to bridge the energy gap with modern, sustainable technology.
           </motion.p>
         </div>
       </section>
@@ -258,10 +269,10 @@ function AboutPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Award className="h-10 w-10 mx-auto text-[color:var(--leaf-deep)]" />
             <h2 className="mt-4 text-4xl md:text-5xl font-semibold leading-tight">
-              Certifications & <span className="text-gradient-bridge">Accreditations</span>
+              Credentials & <span className="text-gradient-bridge">Certifications</span>
             </h2>
             <p className="mt-5 text-muted-foreground text-lg">
-              We're actively pursuing the UK's leading renewable-energy accreditations to give every customer added confidence in our work.
+              Our work is aligned with recognized UK renewable-energy standards and professional accreditation frameworks.
             </p>
           </div>
 
@@ -275,13 +286,10 @@ function AboutPage() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="group relative rounded-3xl bg-card p-6 shadow-soft hover:shadow-glow hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start">
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-bridge text-white shadow-sun">
                     <Award className="h-5 w-5" />
                   </div>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--sun)]/15 text-[color:var(--sun-deep)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide">
-                    <Clock className="h-3 w-3" /> In progress
-                  </span>
                 </div>
                 <h3 className="mt-5 text-xl font-semibold leading-tight">{c.name}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{c.full}</p>
@@ -349,3 +357,4 @@ function AboutPage() {
     </>
   );
 }
+

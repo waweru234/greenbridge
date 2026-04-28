@@ -1,8 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn, Lightbulb, Wind,
+  Sun, Battery, Cpu, Building2, LineChart, ArrowRight, Check, ZoomIn, Lightbulb, Wind, Droplets,
 } from "lucide-react";
 import solarImg from "@/assets/service-solar.jpg";
 import batteryImg from "@/assets/service-battery.jpg";
@@ -28,6 +28,12 @@ import securityLight from "@/assets/uploads/security-light.jpg";
 import solarStreet from "@/assets/uploads/solar-street-light.jpg";
 import windTurbine1 from "@/assets/uploads/wind-turbine-1.jpg";
 import windTurbine2 from "@/assets/uploads/wind-turbine-2.jpg";
+import hotWaterImg from "@/assets/new ones/istockphoto-1033839510-612x612.jpg";
+import solarPumpImg from "@/assets/new ones/istockphoto-1426367897-612x612.jpg";
+import pressureTankImg from "@/assets/new ones/istockphoto-2145846502-612x612.jpg";
+import pressureNetworkImg from "@/assets/new ones/istockphoto-2148663134-640x640.avif";
+import waterKit1 from "@/assets/new ones/images (6).jfif?url";
+import waterKit2 from "@/assets/new ones/images (7).jfif?url";
 import { Lightbox, type LightboxImage } from "@/components/Lightbox";
 
 export const Route = createFileRoute("/services")({
@@ -53,6 +59,12 @@ interface Service {
   useCases: string[];
   image: string;
   gallery: LightboxImage[];
+}
+
+const WHATSAPP_PHONE = "254723363636";
+
+function buildWhatsAppUrl(message: string) {
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 }
 
 const SERVICES: Service[] = [
@@ -182,6 +194,66 @@ const SERVICES: Service[] = [
     gallery: [
       { src: windTurbine1, caption: "Small-scale wind turbine generating clean power on a windy coastal site." },
       { src: windTurbine2, caption: "Wind farm landscape — proof of how powerful African and UK wind resources can be." },
+    ],
+  },
+  {
+    Icon: Sun,
+    title: "Solar Hot Water Systems",
+    tagline: "Heat your water with the sun â€” cut power bills every single day.",
+    description:
+      "We design and install domestic and commercial solar hot water systems that deliver reliable hot water with minimal running cost. From family homes to hotels, schools and clinics, our systems combine solar collectors, insulated storage, smart controls and backup integration so hot water stays available even during low-sun periods.",
+    benefits: [
+      "Reduces electric or fuel water-heating costs by up to 70%",
+      "Reliable hot water supply for homes and businesses",
+      "Low maintenance with long-life, corrosion-resistant components",
+      "Works with existing plumbing and backup heaters",
+    ],
+    useCases: ["Homes & apartments", "Hotels & lodges", "Hospitals & clinics", "Schools & dormitories"],
+    image: hotWaterImg,
+    gallery: [
+      { src: hotWaterImg, caption: "Solar thermal hot-water setup designed for daily domestic demand." },
+      { src: waterKit1, caption: "Compact solar water-heating components suitable for smaller home systems." },
+      { src: waterKit2, caption: "Field-ready hot-water kit hardware for quick installation and commissioning." },
+    ],
+  },
+  {
+    Icon: Cpu,
+    title: "Solar Water Pumping Systems",
+    tagline: "Pump water without diesel â€” dependable irrigation and water access powered by sunlight.",
+    description:
+      "Our solar pumping systems are engineered for farms, boreholes, livestock and community water points. We size pump heads, flow rates and solar arrays for your exact demand profile, then integrate controllers and optional battery or hybrid backup for stable day-long performance in both remote and grid-edge locations.",
+    benefits: [
+      "Eliminates recurring diesel fuel and transport costs",
+      "Delivers reliable daytime pumping for irrigation and supply",
+      "Designed to match required head, flow and seasonal demand",
+      "Remote monitoring for performance and preventive maintenance",
+    ],
+    useCases: ["Irrigation schemes", "Boreholes & wells", "Livestock water supply", "Community water points"],
+    image: solarPumpImg,
+    gallery: [
+      { src: solarPumpImg, caption: "Solar water-pumping setup deployed for agriculture and field irrigation." },
+      { src: solarBorehole, caption: "Solar-powered borehole pumping for off-grid community water access." },
+      { src: pressureNetworkImg, caption: "Network-side equipment supporting controlled delivery from pumped sources." },
+    ],
+  },
+  {
+    Icon: Droplets,
+    title: "Pressurized Water Supply Networks (Non-Tower)",
+    tagline: "Stable pressure without elevated towers â€” smart tank and booster design for modern networks.",
+    description:
+      "We build non-tower pressurized water networks using pressure tanks, booster pumps, control panels and protection systems that maintain steady flow across homes, farms and facilities. This architecture is ideal where tower construction is impractical, expensive or slow, and where reliable pressure control is critical for daily operations.",
+    benefits: [
+      "Consistent water pressure across distributed users",
+      "Lower civil works than conventional tower-based systems",
+      "Pressure tanks protect pumps and reduce cycling wear",
+      "Expandable network design as demand grows",
+    ],
+    useCases: ["Housing estates", "Farm clusters", "Institutional campuses", "Rural trading centers"],
+    image: pressureTankImg,
+    gallery: [
+      { src: pressureTankImg, caption: "Pressurized network hardware configured for non-tower water distribution." },
+      { src: pressureNetworkImg, caption: "Compact pressure components supporting controlled, reliable flow." },
+      { src: waterKit1, caption: "Water supply accessory set used in pump-and-tank network builds." },
     ],
   },
   {
@@ -344,19 +416,27 @@ function ServicesPage() {
                       <p className="text-sm font-semibold uppercase tracking-wider text-foreground/80 mb-3">Where we deploy it</p>
                       <div className="flex flex-wrap gap-2">
                         {useCases.map((u) => (
-                          <span key={u} className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border">
+                          <a
+                            key={u}
+                            href={buildWhatsAppUrl(`Hi Greenbridge Energy, I need ${title} for ${u}. Please assist me with a free consultation.`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border hover:bg-[color:var(--leaf)]/10 hover:border-[color:var(--leaf-deep)] transition"
+                          >
                             {u}
-                          </span>
+                          </a>
                         ))}
                       </div>
                     </div>
 
-                    <Link
-                      to="/contact"
+                    <a
+                      href={buildWhatsAppUrl(`Hi Greenbridge Energy, I want a free consultation for ${title}.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-bridge text-white px-6 py-3 font-semibold shadow-sun hover:-translate-y-0.5 transition"
                     >
                       Discuss your {title.toLowerCase()} project <ArrowRight className="h-4 w-4" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
 
@@ -449,9 +529,14 @@ function ServicesPage() {
                 <h2 className="text-3xl md:text-4xl font-semibold">Not sure which service fits?</h2>
                 <p className="mt-3 text-white/85">Our engineers will assess your site and recommend the right mix — for free.</p>
               </div>
-              <Link to="/contact" className="mt-6 md:mt-0 inline-flex items-center gap-2 rounded-full bg-white text-[color:var(--forest)] px-6 py-3 font-semibold hover:-translate-y-0.5 transition">
+              <a
+                href={buildWhatsAppUrl("Hi Greenbridge Energy, I would like a free consultation.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 md:mt-0 inline-flex items-center gap-2 rounded-full bg-white text-[color:var(--forest)] px-6 py-3 font-semibold hover:-translate-y-0.5 transition"
+              >
                 Talk to an engineer <ArrowRight className="h-4 w-4" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

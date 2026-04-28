@@ -11,10 +11,15 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+const WHATSAPP_PHONE = "254723363636";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Hi Greenbridge Energy, I would like a free consultation.")}`;
+
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
+  const isHome = location.pathname === "/";
+  const overlayMode = isHome;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -29,7 +34,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-[80] transition-all duration-300 ${
         scrolled ? "py-2" : "py-4"
       }`}
     >
@@ -39,7 +44,11 @@ export function SiteHeader() {
         }`}
       >
         <div
-          className={`glass rounded-2xl flex items-center justify-between px-4 sm:px-5 h-16 transition-shadow ${
+          className={`rounded-2xl flex items-center justify-between px-4 sm:px-5 h-16 transition-all ${
+            overlayMode
+              ? "bg-black/35 border border-white/20 backdrop-blur-xl text-white shadow-glow"
+              : "glass text-foreground"
+          } ${
             scrolled ? "shadow-soft" : ""
           }`}
         >
@@ -60,10 +69,15 @@ export function SiteHeader() {
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
                 activeProps={{
-                  className:
-                    "text-primary bg-secondary font-semibold",
+                  className: overlayMode
+                    ? "text-white bg-white/20 font-semibold"
+                    : "text-primary bg-secondary font-semibold",
                 }}
-                className="px-4 py-2 rounded-full text-sm font-medium text-foreground/80 hover:text-primary hover:bg-secondary transition"
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                  overlayMode
+                    ? "text-white/85 hover:text-white hover:bg-white/15"
+                    : "text-foreground/80 hover:text-primary hover:bg-secondary"
+                }`}
               >
                 {item.label}
               </Link>
@@ -71,16 +85,24 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden md:block">
-            <Link
-              to="/contact"
-              className="inline-flex items-center rounded-full bg-gradient-bridge text-white px-5 py-2.5 text-sm font-semibold shadow-sun hover:shadow-glow transition-all hover:-translate-y-0.5"
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${
+                overlayMode
+                  ? "bg-white/15 border border-white/25 text-white hover:bg-white/25"
+                  : "bg-gradient-bridge text-white shadow-sun hover:shadow-glow"
+              }`}
             >
               Free Consultation
-            </Link>
+            </a>
           </div>
 
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-full p-2 text-foreground hover:bg-secondary"
+            className={`md:hidden inline-flex items-center justify-center rounded-full p-2 transition ${
+              overlayMode ? "text-white hover:bg-white/15" : "text-foreground hover:bg-secondary"
+            }`}
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -89,25 +111,39 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <div className="md:hidden mt-2 glass rounded-2xl p-3 shadow-soft">
+          <div className={`md:hidden mt-2 rounded-2xl p-3 shadow-soft ${
+            overlayMode
+              ? "bg-black/55 border border-white/15 backdrop-blur-xl text-white"
+              : "glass"
+          }`}>
             <div className="flex flex-col">
               {NAV.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
                   activeOptions={{ exact: item.to === "/" }}
-                  activeProps={{ className: "text-primary bg-secondary" }}
-                  className="px-4 py-3 rounded-xl text-sm font-medium text-foreground/80 hover:bg-secondary"
+                  activeProps={{ className: overlayMode ? "text-white bg-white/20" : "text-primary bg-secondary" }}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium ${
+                    overlayMode
+                      ? "text-white/85 hover:bg-white/15"
+                      : "text-foreground/80 hover:bg-secondary"
+                  }`}
                 >
                   {item.label}
                 </Link>
               ))}
-              <Link
-                to="/contact"
-                className="mt-2 text-center rounded-xl bg-gradient-bridge text-white px-4 py-3 text-sm font-semibold"
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-2 text-center rounded-xl px-4 py-3 text-sm font-semibold ${
+                  overlayMode
+                    ? "bg-white/15 border border-white/25 text-white hover:bg-white/25"
+                    : "bg-gradient-bridge text-white"
+                }`}
               >
                 Free Consultation
-              </Link>
+              </a>
             </div>
           </div>
         )}

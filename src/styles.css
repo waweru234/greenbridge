@@ -113,6 +113,9 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--leaf-deep) 70%, var(--sun) 30%) color-mix(in oklab, var(--muted) 70%, transparent);
   }
 
   body {
@@ -129,6 +132,27 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+}
+
+/* Branded scrollbar */
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+*::-webkit-scrollbar-track {
+  background: color-mix(in oklab, var(--muted) 78%, white 22%);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--leaf) 0%, var(--leaf-deep) 60%, var(--sun-deep) 100%);
+  border-radius: 999px;
+  border: 2px solid color-mix(in oklab, var(--muted) 78%, white 22%);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--leaf-deep) 0%, var(--sun-deep) 100%);
 }
 
 @layer utilities {
@@ -187,6 +211,31 @@
     inset: 0;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.45));
     pointer-events: none;
+  }
+
+  /* Decorative hero overlays */
+  .hero-color-overlay {
+    background: linear-gradient(180deg, rgba(24, 64, 44, 0.18), rgba(248, 140, 22, 0.12));
+    mix-blend-mode: overlay;
+    opacity: 0.95;
+  }
+  .hero-vignette {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+    pointer-events: none;
+  }
+  .hero-light-streak {
+    background: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.06) 100%);
+    transform: translateX(-30%);
+    filter: blur(18px) saturate(1.1);
+    opacity: 0.9;
+    animation: light-streak 9s linear infinite;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes light-streak {
+    0% { transform: translateX(-30%) rotate(-12deg); }
+    50% { transform: translateX(40%) rotate(-12deg); }
+    100% { transform: translateX(120%) rotate(-12deg); }
   }
 }
 
