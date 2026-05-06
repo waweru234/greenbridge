@@ -27,7 +27,7 @@ const LEADERS = [
     name: "Jimsley Omari",
     role: "Founder & Director",
     photo: jimsley,
-    phone: "+44 7520 674133",
+    phone: "+253 723 363636",
     creds: ["PhD, Mechanical Engineering", "Energy Systems & Infrastructure"],
     bio: "PhD Mechanical Engineer with experience in energy systems, infrastructure, and business development. Jimsley brings a strong technical background and a strategic vision to bridge energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to clean energy across Africa.",
   },
