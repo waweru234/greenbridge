@@ -11,6 +11,7 @@ function Instagram(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 import logo from "@/assets/logo.png";
+import krisilLogo from "@/assets/krisil-logo.png";
 
 export function SiteFooter() {
   return (
@@ -59,7 +60,7 @@ export function SiteFooter() {
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
-              <span>+44 7349 013628 · +254 723 363636</span>
+              <span>+44 7520 674133 · +254 723 363636</span>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-[color:var(--sun)] shrink-0" />
@@ -76,6 +77,10 @@ export function SiteFooter() {
         <div className="mx-auto max-w-7xl px-6 py-6 text-xs text-white/60 flex flex-wrap items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} Greenbridge Energy Limited. All rights reserved.</span>
           <span>Bridging Clean Energy between the UK and Africa.</span>
+          <a href="https://krisil.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white/70 hover:text-white">
+            <img src={krisilLogo} alt="Krisil" className="h-6 w-auto" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+            <span>Web design by Krisil</span>
+          </a>
         </div>
       </div>
     </footer>

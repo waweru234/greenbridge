@@ -1,19 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind } from "lucide-react";
+import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind, Droplets } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
 import heroVideo from "@/assets/Hailuo_Video_Just make it look like the sun_505142339831885827.mp4";
-import aerialSolarVideo from "@/assets/new ones/stock-footage-aerial-drone-view-into-large-solar-panels-at-a-solar-farm-at-bright-sunset-solar-cell-power-plants.mp4";
-import waterFlowVideo from "@/assets/new ones/stock-footage-water-flows-from-a-solar-powered-tubewell-beside-solar-panels-used-for-irrigating-nearby-farmland.mp4";
+import cinematicSolarVideo from "@/assets/9788594-uhd_3840_2160_24fps.mp4";
+import rooftopSolarVideo from "@/assets/12717378_1920_1080_60fps.mp4";
+import sunriseGridVideo from "@/assets/18712069-uhd_3840_2160_30fps.mp4";
 import projectUk from "@/assets/uploads/ground-mount-residential.jpg";
 import projectInstall from "@/assets/uploads/install-team-roof.jpg";
 import projectAfrica from "@/assets/uploads/solar-borehole.jpg";
+import africaMap from "@/assets/africa.svg";
+import servicesFeatureImage from "@/assets/pexels-elite-power-group-661996115-33438126.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Greenbridge Energy — Clean Power for the UK & Africa" },
+      { title: "Greenbridge Energy - Clean Power for the UK & Africa" },
       {
         name: "description",
         content:
@@ -32,6 +35,103 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
+
+type HomeService = {
+  Icon: typeof Sun;
+  t: string;
+  d: string;
+  tag: string;
+};
+
+type ProjectPoint = {
+  name: string;
+  x: number;
+  y: number;
+  labelX?: number;
+  labelY?: number;
+};
+
+const HOME_SERVICES: HomeService[] = [
+  {
+    Icon: Sun,
+    t: "Solar PV Installation",
+    d: "Residential, commercial and utility-scale solar PV systems engineered for the UK climate and African sun.",
+    tag: "UK & Africa",
+  },
+  {
+    Icon: Battery,
+    t: "Battery Storage Solutions",
+    d: "Lithium-ion battery systems that store solar by day and power your site through the evening peak - or a blackout.",
+    tag: "Backup & Peak-shaving",
+  },
+  {
+    Icon: Cpu,
+    t: "Off-Grid & Hybrid Systems",
+    d: "Solar + battery + optional generator microgrids bringing 24/7 reliable power to off-grid homes, clinics and villages.",
+    tag: "Africa Focus",
+  },
+  {
+    Icon: Building2,
+    t: "Commercial & Industrial Energy Solutions",
+    d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.",
+    tag: "C&I Energy",
+  },
+  {
+    Icon: Lightbulb,
+    t: "Solar Lighting (Home & Security)",
+    d: "Solar lights for homes and motion-activated security floodlights with clean, instant and zero-running-cost light.",
+    tag: "Domestic & Security",
+  },
+  {
+    Icon: Wind,
+    t: "Wind Power Generators",
+    d: "Small-scale wind turbines paired with solar to deliver true 24/7 renewable generation in windy coastal and highland sites.",
+    tag: "Hybrid Renewable",
+  },
+  {
+    Icon: Sun,
+    t: "Solar Hot Water Systems",
+    d: "Heat your water with the sun - cut power bills every single day.",
+    tag: "Water Heating",
+  },
+  {
+    Icon: Cpu,
+    t: "Solar Water Pumping Systems",
+    d: "Pump water without diesel - dependable irrigation and water access powered by sunlight.",
+    tag: "Irrigation & Supply",
+  },
+  {
+    Icon: Droplets,
+    t: "Pressurized Water Supply Networks (Non-Tower)",
+    d: "Stable pressure without elevated towers - smart tank and booster design for modern networks.",
+    tag: "Water Networks",
+  },
+  {
+    Icon: LineChart,
+    t: "Energy Consultation & System Design",
+    d: "Independent feasibility, sizing and bankable design.",
+    tag: "Advisory",
+  },
+];
+
+const EAST_AFRICA_PROJECT_POINTS: ProjectPoint[] = [
+  { name: "Nairobi, Kenya", x: 152, y: 122, labelX: 158, labelY: 119 },
+  { name: "Kisumu, Kenya", x: 146, y: 119, labelX: 126, labelY: 114 },
+  { name: "Mombasa, Kenya", x: 162, y: 131, labelX: 167, labelY: 136 },
+  { name: "Kampala, Uganda", x: 143, y: 115, labelX: 123, labelY: 110 },
+  { name: "Kigali, Rwanda", x: 140, y: 124, labelX: 116, labelY: 130 },
+  { name: "Dar es Salaam, Tanzania", x: 158, y: 136, labelX: 164, labelY: 147 },
+  { name: "Arusha, Tanzania", x: 154, y: 129, labelX: 160, labelY: 125 },
+];
+
+const EAST_AFRICA_PROJECT_CONNECTIONS: Array<[number, number]> = [
+  [0, 1],
+  [0, 2],
+  [0, 3],
+  [3, 4],
+  [0, 5],
+  [0, 6],
+];
 
 function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -175,7 +275,7 @@ function HomePage() {
               >
                 <Leaf className="h-3.5 w-3.5 text-[color:var(--sun)]" />
               </motion.span>
-              Renewable Energy · UK & Africa
+              Renewable Energy - UK & Africa
             </motion.span>
 
             <motion.h1
@@ -198,7 +298,7 @@ function HomePage() {
 
             <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg text-white/85 leading-relaxed">
               We design, finance and deliver solar, wind and grid systems that
-              power homes, businesses and communities — sustainably and at scale.
+              power homes, businesses and communities - sustainably and at scale.
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-4">
@@ -245,7 +345,7 @@ function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* mute control removed for a clean hero — video stays muted for autoplay */}
+        {/* mute control removed for a clean hero - video stays muted for autoplay */}
 
         {/* Scroll cue */}
         <motion.div
@@ -310,64 +410,90 @@ function HomePage() {
               Live project footage, <span className="text-gradient-bridge">real field conditions</span>.
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              Aerial and on-ground video from solar and water projects to show how systems perform in real environments.
+              Cinematic installation and performance footage showing how our clean-energy systems look and operate on real project sites.
             </p>
           </motion.div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 lg:grid-cols-12">
             <motion.article
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-2 rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
+              className="lg:col-span-7 rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
             >
               <div className="relative">
                 <video
-                  src={aerialSolarVideo}
-                  className="w-full h-[280px] md:h-[420px] object-cover"
+                  src={cinematicSolarVideo}
+                  className="w-full h-[300px] md:h-[460px] object-cover"
                   autoPlay
                   muted
                   loop
                   playsInline
-                  controls
                   preload="metadata"
-                  aria-label="Aerial drone view of solar farm"
+                  aria-label="Cinematic renewable energy project footage"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 text-white">
-                  <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Drone footage</p>
-                  <p className="text-lg md:text-2xl font-semibold">Utility-scale solar arrays at sunset</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-5 left-5 text-white pr-5">
+                  <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Featured footage</p>
+                  <p className="text-lg md:text-2xl font-semibold leading-tight">Cinematic clean-energy deployment at scale</p>
                 </div>
               </div>
             </motion.article>
 
-            <motion.article
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
-            >
-              <div className="relative h-full min-h-[280px] md:min-h-[420px]">
-                <video
-                  src={waterFlowVideo}
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls
-                  preload="metadata"
-                  aria-label="Water flowing from solar-powered tubewell"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 text-white pr-4">
-                  <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Field footage</p>
-                  <p className="text-base md:text-xl font-semibold leading-tight">Solar-powered tubewell irrigation in operation</p>
+            <div className="lg:col-span-5 grid gap-6">
+              <motion.article
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.08 }}
+                className="rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
+              >
+                <div className="relative">
+                  <video
+                    src={rooftopSolarVideo}
+                    className="w-full h-[240px] md:h-[218px] object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="Rooftop and field solar installation footage"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 text-white pr-4">
+                    <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Site operations</p>
+                    <p className="text-base md:text-lg font-semibold leading-tight">Precision installation in live conditions</p>
+                  </div>
                 </div>
-              </div>
-            </motion.article>
+              </motion.article>
+
+              <motion.article
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.16 }}
+                className="rounded-3xl overflow-hidden border border-border shadow-soft bg-card"
+              >
+                <div className="relative">
+                  <video
+                    src={sunriseGridVideo}
+                    className="w-full h-[240px] md:h-[218px] object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="Solar generation and grid performance footage"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 text-white pr-4">
+                    <p className="text-xs uppercase tracking-[0.16em] font-semibold text-white/80">Performance view</p>
+                    <p className="text-base md:text-lg font-semibold leading-tight">Reliable output through dynamic daylight cycles</p>
+                  </div>
+                </div>
+              </motion.article>
+            </div>
           </div>
         </div>
       </section>
@@ -375,34 +501,48 @@ function HomePage() {
       {/* SERVICES */}
       <section className="py-24 bg-gradient-soft">
         <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
-              What we do
-            </p>
-            <h2 className="mt-3 text-4xl md:text-5xl font-semibold">
-              End-to-end <span className="text-gradient-bridge">renewable solutions</span>
-            </h2>
-            <p className="mt-4 text-muted-foreground text-lg">
-              From feasibility to switch-on, we deliver every layer of the clean energy stack — across the UK and Africa.
-            </p>
-          </motion.div>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl"
+            >
+              <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">
+                What we do
+              </p>
+              <h2 className="mt-3 text-4xl md:text-5xl font-semibold">
+                End-to-end <span className="text-gradient-bridge">renewable solutions</span>
+              </h2>
+              <p className="mt-4 text-muted-foreground text-lg">
+                From feasibility to switch-on, we deliver every layer of the clean energy stack - across the UK and Africa.
+              </p>
+            </motion.div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { Icon: Sun, t: "Solar PV Installation", d: "Residential, commercial and utility-scale solar PV systems engineered for the UK climate and African sun.", tag: "UK & Africa" },
-              { Icon: Battery, t: "Battery Storage Solutions", d: "Lithium-ion battery systems that store solar by day and power your site through the evening peak — or a blackout.", tag: "Backup & Peak-shaving" },
-              { Icon: Cpu, t: "Off-Grid & Hybrid Systems", d: "Solar + battery + (optional) generator microgrids bringing 24/7 reliable power to off-grid homes, clinics and villages.", tag: "Africa Focus" },
-              { Icon: Building2, t: "Commercial & Industrial Energy Solutions", d: "Turnkey C&I solar and storage cutting energy bills, diesel use and carbon for factories, hotels and agribusinesses.", tag: "C&I Energy" },
-              { Icon: Lightbulb, t: "Solar Lighting (Home & Security)", d: "Solar lights for domestic homes and motion-activated security floodlights — clean, instant, zero-running-cost light wherever you need it.", tag: "Domestic & Security" },
-              { Icon: Wind, t: "Wind Power Generators", d: "Small-scale wind turbines paired with solar to deliver true 24/7 renewable generation in windy coastal and highland sites.", tag: "Hybrid Renewable" },
-              { Icon: LineChart, t: "Energy Consultation & System Design", d: "Independent feasibility studies, system sizing, financial modelling and bankable system design.", tag: "Advisory" },
-            ].map(({ Icon, t, d, tag }, i) => (
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.65, delay: 0.1 }}
+              className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-soft"
+            >
+              <img
+                src={servicesFeatureImage}
+                alt="Engineers inspecting solar energy systems during a field deployment"
+                className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 md:h-72"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/78 via-[color:var(--forest)]/18 to-transparent" />
+              <figcaption className="absolute bottom-4 left-4 right-4 text-white">
+                <p className="text-xs uppercase tracking-[0.14em] font-semibold text-white/80">Service delivery</p>
+                <p className="mt-1 text-lg font-semibold leading-tight">Reliable engineering from design to deployment</p>
+              </figcaption>
+            </motion.figure>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {HOME_SERVICES.map(({ Icon, t, d, tag }, i) => (
               <motion.div
                 key={t}
                 initial={{ opacity: 0, y: 32 }}
@@ -435,6 +575,148 @@ function HomePage() {
                   Learn more <ArrowRight className="h-4 w-4" />
                 </Link>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DEPLOYMENT MAP */}
+      <section className="relative overflow-hidden py-24 bg-[linear-gradient(180deg,hsl(var(--background))_0%,rgba(6,18,12,0.96)_28%,rgba(3,11,8,1)_100%)] text-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8 }}
+          className="pointer-events-none absolute inset-0 z-0"
+        >
+          <motion.div
+            className="absolute inset-0"
+            animate={{ opacity: [0.72, 0.96, 0.72] }}
+            transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="absolute inset-0" style={{ background: "linear-gradient(170deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)), radial-gradient(circle at 16% 16%, rgba(239, 68, 68, 0.16), transparent 34%), radial-gradient(circle at 82% 76%, rgba(34, 197, 94, 0.12), transparent 42%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, rgba(2, 10, 7, 0.62) 0%, rgba(4, 14, 10, 0.45) 42%, rgba(8, 24, 17, 0.24) 72%, rgba(2, 10, 7, 0.58) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, hsl(var(--background)) 0%, rgba(5, 17, 11, 0.45) 24%, rgba(4, 13, 10, 0.62) 100%)" }} />
+            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(0,0,0,0.04) 32%, rgba(0,0,0,0.42) 74%, rgba(0,0,0,0.72) 100%)" }} />
+
+            <motion.div
+              className="absolute inset-x-0 top-20 bottom-[-16%]"
+              animate={{ scale: 2.48, x: "-36%", y: "-27%" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                transformOrigin: "61% 53%",
+                WebkitMaskImage: "radial-gradient(ellipse at center, rgba(0,0,0,1) 46%, rgba(0,0,0,0.95) 66%, rgba(0,0,0,0) 90%)",
+                maskImage: "radial-gradient(ellipse at center, rgba(0,0,0,1) 46%, rgba(0,0,0,0.95) 66%, rgba(0,0,0,0) 90%)",
+              }}
+            >
+              <img
+                src={africaMap}
+                alt="Africa map background"
+                className="absolute inset-0 h-full w-full object-fill opacity-95 select-none pointer-events-none"
+                style={{ filter: "brightness(1.14) contrast(1.12) saturate(1.04)" }}
+              />
+              <svg
+                viewBox="0 0 239.05701 217.31789"
+                className="absolute inset-0 h-full w-full opacity-95"
+                role="img"
+                aria-label="East Africa project network map"
+              >
+                <defs>
+                  <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ff6b6b" />
+                    <stop offset="100%" stopColor="#dc2626" />
+                  </linearGradient>
+                </defs>
+
+                {EAST_AFRICA_PROJECT_CONNECTIONS.map(([from, to], i) => (
+                  <motion.line
+                    key={`${EAST_AFRICA_PROJECT_POINTS[from].name}-${EAST_AFRICA_PROJECT_POINTS[to].name}`}
+                    x1={EAST_AFRICA_PROJECT_POINTS[from].x}
+                    y1={EAST_AFRICA_PROJECT_POINTS[from].y}
+                    x2={EAST_AFRICA_PROJECT_POINTS[to].x}
+                    y2={EAST_AFRICA_PROJECT_POINTS[to].y}
+                    stroke="url(#routeGradient)"
+                    strokeWidth="1.8"
+                    strokeDasharray="4 2.6"
+                    animate={{ opacity: [0.45, 1, 0.45], strokeDashoffset: [0, -14] }}
+                    transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.18, ease: "easeInOut" }}
+                  />
+                ))}
+
+                {EAST_AFRICA_PROJECT_POINTS.map((point, i) => (
+                  <g key={point.name}>
+                    <motion.circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="4.8"
+                      fill="rgba(239, 68, 68, 0.34)"
+                      animate={{ r: [4.8, 9.2, 4.8], opacity: [0.9, 0.18, 0.9] }}
+                      transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.16, ease: "easeInOut" }}
+                    />
+                    <motion.circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="3.4"
+                      fill="none"
+                      stroke="rgba(255, 255, 255, 0.7)"
+                      strokeWidth="0.7"
+                      animate={{ r: [3.4, 6.4, 3.4], opacity: [0.75, 0.22, 0.75] }}
+                      transition={{ duration: 2.1, repeat: Infinity, delay: i * 0.16 + 0.1, ease: "easeInOut" }}
+                    />
+                    <motion.circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="2.4"
+                      fill="#ef4444"
+                      animate={{ r: [2.2, 3, 2.2], opacity: [0.86, 1, 0.86] }}
+                      transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.12, ease: "easeInOut" }}
+                    />
+                    <circle cx={point.x} cy={point.y} r="0.95" fill="white" />
+                    <text
+                      x={point.labelX ?? point.x + 3.6}
+                      y={point.labelY ?? point.y - 3}
+                      fontSize="4.8"
+                      fill="rgba(255, 255, 255, 0.98)"
+                      stroke="rgba(7, 26, 18, 0.95)"
+                      strokeWidth="0.95"
+                      paintOrder="stroke fill"
+                    >
+                      {point.name}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        <div className="relative z-20 mx-auto max-w-7xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--sun)]">
+              Deployment map
+            </p>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
+              Connected projects across <span className="text-gradient-bridge">Africa</span>.
+            </h2>
+            <p className="mt-4 text-white/78 text-lg">
+              East Africa project network view with active locations and live deployment links.
+            </p>
+          </motion.div>
+
+          <div className="h-[290px] md:h-[420px]" aria-hidden="true" />
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {EAST_AFRICA_PROJECT_POINTS.map((point) => (
+              <span key={point.name} className="inline-flex items-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-3 py-1 text-xs font-medium text-white/95">
+                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#ef4444] animate-pulse shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+                {point.name}
+              </span>
             ))}
           </div>
         </div>

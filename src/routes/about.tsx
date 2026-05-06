@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Award, Quote, CheckCircle2, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
+import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Phone, Award, Quote, CheckCircle2, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
 
 import jimsley from "@/assets/jinsley Omari.png";
+import georgeHenry from "@/assets/WhatsApp Image 2026-05-05 at 06.52.08.jpeg";
 import story1 from "@/assets/uploads/story-1.jpg";
 import story2 from "@/assets/uploads/story-2.jpg";
 import story3 from "@/assets/uploads/story-3.jpg";
 import story4 from "@/assets/uploads/story-4.jpg";
 import pumpOpsVideo from "@/assets/new ones/istockphoto-881095546-640_adpp_is.mp4";
+import missionVisionImage from "@/assets/pexels-pexels-user-2148810973-30285845.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -25,8 +27,17 @@ const LEADERS = [
     name: "Jimsley Omari",
     role: "Founder & Director",
     photo: jimsley,
+    phone: "+44 7520 674133",
     creds: ["PhD, Mechanical Engineering", "Energy Systems & Infrastructure"],
     bio: "PhD Mechanical Engineer with experience in energy systems, infrastructure, and business development. Jimsley brings a strong technical background and a strategic vision to bridge energy solutions between developed and emerging markets. He is passionate about sustainable development and expanding access to clean energy across Africa.",
+  },
+  {
+    name: "George Henry",
+    role: "CEO & Director",
+    photo: georgeHenry,
+    phone: "+44 7520 674133",
+    creds: ["Executive Leadership", "Cross-continental Energy Strategy"],
+    bio: "George Henry leads Greenbridge's strategic direction and delivery partnerships across the UK and Africa. As CEO and Director, he focuses on scaling practical renewable-energy deployment with strong governance, commercial discipline, and long-term impact for communities and businesses.",
   },
 ];
 
@@ -118,7 +129,45 @@ function AboutPage() {
       {/* Mission & Vision */}
       <section className="py-20 bg-gradient-soft">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl"
+            >
+              <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">Mission & vision</p>
+              <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">
+                Built on purpose, powered by <span className="text-gradient-bridge">clean energy ambition</span>.
+              </h2>
+              <p className="mt-4 text-muted-foreground text-lg">
+                Our mission and vision are grounded in real deployment impact across communities, businesses and critical infrastructure.
+              </p>
+            </motion.div>
+
+            <motion.figure
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, delay: 0.08 }}
+              className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-soft"
+            >
+              <img
+                src={missionVisionImage}
+                alt="Renewable energy field installation supporting mission-driven clean power projects"
+                className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 md:h-80"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--forest)]/75 via-[color:var(--forest)]/16 to-transparent" />
+              <figcaption className="absolute bottom-4 left-4 right-4 text-white">
+                <p className="text-xs uppercase tracking-[0.14em] font-semibold text-white/80">Our direction</p>
+                <p className="mt-1 text-lg font-semibold leading-tight">A practical vision for affordable, resilient clean energy</p>
+              </figcaption>
+            </motion.figure>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
             {[
               {
                 Icon: Target,
@@ -247,6 +296,14 @@ function AboutPage() {
                       >
                         <Mail className="h-4 w-4" /> Contact
                       </a>
+                      {leader.phone && (
+                        <a
+                          href={`tel:${leader.phone.replace(/\s/g, "")}`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground hover:border-[color:var(--leaf-deep)] hover:text-[color:var(--leaf-deep)] transition"
+                        >
+                          <Phone className="h-4 w-4" /> {leader.phone}
+                        </a>
+                      )}
                       <a
                         href="#"
                         aria-label="LinkedIn"

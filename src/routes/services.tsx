@@ -199,7 +199,7 @@ const SERVICES: Service[] = [
   {
     Icon: Sun,
     title: "Solar Hot Water Systems",
-    tagline: "Heat your water with the sun â€” cut power bills every single day.",
+    tagline: "Heat your water with the sun - cut power bills every single day.",
     description:
       "We design and install domestic and commercial solar hot water systems that deliver reliable hot water with minimal running cost. From family homes to hotels, schools and clinics, our systems combine solar collectors, insulated storage, smart controls and backup integration so hot water stays available even during low-sun periods.",
     benefits: [
@@ -219,7 +219,7 @@ const SERVICES: Service[] = [
   {
     Icon: Cpu,
     title: "Solar Water Pumping Systems",
-    tagline: "Pump water without diesel â€” dependable irrigation and water access powered by sunlight.",
+    tagline: "Pump water without diesel - dependable irrigation and water access powered by sunlight.",
     description:
       "Our solar pumping systems are engineered for farms, boreholes, livestock and community water points. We size pump heads, flow rates and solar arrays for your exact demand profile, then integrate controllers and optional battery or hybrid backup for stable day-long performance in both remote and grid-edge locations.",
     benefits: [
@@ -239,7 +239,7 @@ const SERVICES: Service[] = [
   {
     Icon: Droplets,
     title: "Pressurized Water Supply Networks (Non-Tower)",
-    tagline: "Stable pressure without elevated towers â€” smart tank and booster design for modern networks.",
+    tagline: "Stable pressure without elevated towers - smart tank and booster design for modern networks.",
     description:
       "We build non-tower pressurized water networks using pressure tanks, booster pumps, control panels and protection systems that maintain steady flow across homes, farms and facilities. This architecture is ideal where tower construction is impractical, expensive or slow, and where reliable pressure control is critical for daily operations.",
     benefits: [

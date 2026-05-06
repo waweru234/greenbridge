@@ -79,7 +79,7 @@ function ContactPage() {
                 region: "United Kingdom Office",
                 company: "Greenbridge Energy Limited",
                 address: ["34 Lullington Close", "Manchester, M22 1LY", "England"],
-                phone: "+44 7349 013628",
+                phone: "+44 7520 674133",
                 accent: "from-[#1a3a8f] via-[#2456b8] to-[#cf142b]",
               },
               {
