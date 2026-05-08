@@ -8,7 +8,10 @@ interface AuthContextValue {
   isAdmin: boolean;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
-  signUp: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signUp: (
+    email: string,
+    password: string,
+  ) => Promise<{ error: Error | null; needsEmailVerification: boolean }>;
   signOut: () => Promise<void>;
 }
 
@@ -28,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (newSession?.user) {
         // Defer role check to avoid deadlock
         setTimeout(() => {
-          void checkAdmin(newSession.user.id);
+          void ensureRoleAndCheckAdmin(newSession.user.id);
         }, 0);
       } else {
         setIsAdmin(false);
@@ -40,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(data.session);
       setUser(data.session?.user ?? null);
       if (data.session?.user) {
-        void checkAdmin(data.session.user.id);
+        void ensureRoleAndCheckAdmin(data.session.user.id);
       }
       setLoading(false);
     });
@@ -58,6 +61,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAdmin(!!data);
   }
 
+  async function ensureDefaultRole() {
+    const { error } = await supabase.rpc("ensure_current_user_default_role");
+    if (error) {
+      console.warn("Failed to ensure default role:", error.message);
+    }
+  }
+
+  async function ensureRoleAndCheckAdmin(userId: string) {
+    await ensureDefaultRole();
+    await checkAdmin(userId);
+  }
+
   const value: AuthContextValue = {
     session,
     user,
@@ -68,13 +83,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { error };
     },
     async signUp(email, password) {
-      const redirectUrl = `${window.location.origin}/admin`;
-      const { error } = await supabase.auth.signUp({
+      const redirectUrl = `${window.location.origin}/auth`;
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: { emailRedirectTo: redirectUrl },
       });
-      return { error };
+      if (!error && data.session?.user) {
+        await ensureRoleAndCheckAdmin(data.session.user.id);
+      }
+      return {
+        error,
+        needsEmailVerification: !data.session,
+      };
     },
     async signOut() {
       await supabase.auth.signOut();

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Target, Eye, Heart, Globe2, GraduationCap, Mail, Phone, Award, Quote, CheckCircle2, Link2, Leaf, Lightbulb, ShieldCheck, HandHeart, Sparkles } from "lucide-react";
+import { useSiteContent } from "@/lib/content";
 
 import jimsley from "@/assets/jinsley Omari.png";
 import georgeHenry from "@/assets/WhatsApp Image 2026-05-05 at 06.52.08.jpeg";
@@ -61,7 +62,42 @@ const TESTIMONIALS = [
   },
 ];
 
+interface AboutContentValue {
+  heading?: string;
+  story1?: string;
+  story2?: string;
+}
+
+interface TextContentValue {
+  text?: string;
+}
+
+const DEFAULT_ABOUT_CONTENT: Required<AboutContentValue> = {
+  heading: "A bridge built from sun, wind & purpose.",
+  story1:
+    "Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions. Operating between the UK and Africa, we specialize in designing and deploying systems that address both advanced energy efficiency needs and energy access challenges.",
+  story2:
+    "In the UK, we provide compliant, high-quality solar installations for residential and commercial clients. In Africa, we focus on off-grid and hybrid systems that bring reliable electricity to underserved communities and businesses.",
+};
+
+const DEFAULT_MISSION =
+  "Greenbridge Energy Limited is committed to delivering reliable, affordable, and sustainable energy solutions across the United Kingdom and Africa. We bridge the energy gap by deploying modern renewable technologies that empower communities, support businesses, and accelerate the transition to a low-carbon future.";
+
+const DEFAULT_VISION =
+  "To become a leading cross-continental renewable energy company, transforming how energy is generated, distributed, and consumed in emerging and developed markets.";
+
 function AboutPage() {
+  const { content } = useSiteContent();
+  const aboutContent = (content.about as AboutContentValue | undefined) ?? {};
+  const missionContent = (content.mission as TextContentValue | undefined) ?? {};
+  const visionContent = (content.vision as TextContentValue | undefined) ?? {};
+
+  const aboutHeading = aboutContent.heading?.trim() || DEFAULT_ABOUT_CONTENT.heading;
+  const aboutStory1 = aboutContent.story1?.trim() || DEFAULT_ABOUT_CONTENT.story1;
+  const aboutStory2 = aboutContent.story2?.trim() || DEFAULT_ABOUT_CONTENT.story2;
+  const missionText = missionContent.text?.trim() || DEFAULT_MISSION;
+  const visionText = visionContent.text?.trim() || DEFAULT_VISION;
+
   return (
     <>
       {/* Hero */}
@@ -80,10 +116,10 @@ function AboutPage() {
         <div className="mx-auto max-w-5xl px-6 text-center">
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-sm font-semibold uppercase tracking-wider text-white/85">About us</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 text-5xl md:text-6xl font-semibold leading-tight text-white">
-            A bridge built from <span className="text-[color:var(--sun)]">sun, wind & purpose</span>.
+            {aboutHeading}
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-6 text-lg text-white/85 max-w-3xl mx-auto leading-relaxed">
-            Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions - operating between the UK and Africa to bridge the energy gap with modern, sustainable technology.
+            {aboutStory1}
           </motion.p>
         </div>
       </section>
@@ -114,10 +150,10 @@ function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">About us</p>
             <h2 className="mt-3 text-4xl md:text-5xl font-semibold leading-tight">Two continents. <span className="text-gradient-bridge">One energy story.</span></h2>
             <p className="mt-5 text-muted-foreground leading-relaxed text-[1.02rem]">
-              Greenbridge Energy Limited is a renewable energy company focused on solar power, battery storage, and off-grid energy solutions. Operating between the UK and Africa, we specialize in designing and deploying systems that address both advanced energy efficiency needs and energy access challenges.
+              {aboutStory1}
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed text-[1.02rem]">
-              In the UK, we provide compliant, high-quality solar installations for residential and commercial clients. In Africa, we focus on off-grid and hybrid systems that bring reliable electricity to underserved communities and businesses.
+              {aboutStory2}
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed text-[1.02rem]">
               Our approach combines engineering expertise, global partnerships, and a strong commitment to sustainability — turning sunshine and wind into power, opportunity and lasting change.
@@ -172,12 +208,12 @@ function AboutPage() {
               {
                 Icon: Target,
                 t: "Mission Statement",
-                d: "Greenbridge Energy Limited is committed to delivering reliable, affordable, and sustainable energy solutions across the United Kingdom and Africa. We bridge the energy gap by deploying modern renewable technologies that empower communities, support businesses, and accelerate the transition to a low-carbon future.",
+                d: missionText,
               },
               {
                 Icon: Eye,
                 t: "Vision",
-                d: "To become a leading cross-continental renewable energy company, transforming how energy is generated, distributed, and consumed in emerging and developed markets.",
+                d: visionText,
               },
             ].map(({ Icon, t, d }, i) => (
               <motion.div

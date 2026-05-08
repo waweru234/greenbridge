@@ -38,14 +38,24 @@ function AuthPage() {
       return;
     }
     setBusy(true);
-    const { error } = mode === "signin" ? await signIn(email, password) : await signUp(email, password);
+    let error: Error | null = null;
+    let needsEmailVerification = false;
+    if (mode === "signin") {
+      ({ error } = await signIn(email, password));
+    } else {
+      ({ error, needsEmailVerification } = await signUp(email, password));
+    }
     setBusy(false);
     if (error) {
       toast.error(error.message);
       return;
     }
     if (mode === "signup") {
-      toast.success("Account created. You can sign in now.");
+      toast.success(
+        needsEmailVerification
+          ? "Account created. Check your email to confirm your account, then sign in."
+          : "Account created. You can sign in now.",
+      );
       setMode("signin");
     } else {
       toast.success("Signed in");
@@ -69,7 +79,7 @@ function AuthPage() {
           </div>
           <h1 className="mt-5 text-2xl font-semibold text-center">Admin Portal</h1>
           <p className="mt-1 text-sm text-muted-foreground text-center">
-            {mode === "signin" ? "Sign in to manage content" : "Create an admin account"}
+            {mode === "signin" ? "Sign in to manage content" : "Create a regular account"}
           </p>
 
           {user && !isAdmin && (
