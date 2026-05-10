@@ -4,7 +4,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChatBot } from "@/components/ChatBot";
 import { AuthProvider } from "@/lib/auth";
+import { trackPageVisit } from "@/lib/traffic";
 import { Toaster } from "sonner";
+import { useEffect } from "react";
 
 function NotFoundComponent() {
   return (
@@ -37,6 +39,12 @@ function RootComponent() {
   const { location } = useRouterState();
   const isAdmin = location.pathname.startsWith("/admin") || location.pathname === "/auth";
   const isHome = location.pathname === "/";
+  const pagePath = `${location.pathname}`;
+
+  useEffect(() => {
+    if (isAdmin) return;
+    void trackPageVisit(pagePath);
+  }, [isAdmin, pagePath]);
 
   return (
     <AuthProvider>

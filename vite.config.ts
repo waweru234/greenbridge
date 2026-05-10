@@ -4,6 +4,13 @@ import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const vitePrerenderModule = require("vite-plugin-prerender");
+const vitePrerender = vitePrerenderModule.default ?? vitePrerenderModule;
+
+const PRERENDER_ROUTES = ["/", "/about", "/services", "/projects", "/contact"];
 
 // SPA build: TanStack Router (file-based) + Tailwind v4.
 // Output → dist/, suitable for Vercel static hosting with a SPA fallback.
@@ -18,6 +25,17 @@ export default defineConfig({
     }),
     tailwindcss(),
     react(),
+    vitePrerender({
+      staticDir: path.join(__dirname, "dist"),
+      routes: PRERENDER_ROUTES,
+      renderer: new vitePrerender.PuppeteerRenderer({
+        renderAfterTime: 1500,
+        maxConcurrentRoutes: 4,
+        skipThirdPartyRequests: true,
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      }),
+    }),
   ],
   resolve: {
     alias: {
