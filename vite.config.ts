@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 import { createRequire } from "node:module";
@@ -18,11 +17,8 @@ export default defineConfig({
   base: "/",
   plugins: [
     tsconfigPaths(),
-    TanStackRouterVite({
-      routesDirectory: "./src/routes",
-      generatedRouteTree: "./src/routeTree.gen.ts",
-      autoCodeSplitting: true,
-    }),
+    // NOTE: @tanstack/router-plugin removed from plugins to avoid install-time 404 on vercel.
+    // If you need automatic file-based route generation again, re-add TanStackRouterVite and ensure the package resolves.
     tailwindcss(),
     react(),
     vitePrerender({
