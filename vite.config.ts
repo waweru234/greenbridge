@@ -4,10 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
-const vitePrerenderModule = require("vite-plugin-prerender");
-const vitePrerender = vitePrerenderModule.default ?? vitePrerenderModule;
+// prerender plugin removed due to vulnerable transitive dependencies (html-minifier / puppeteer)
 
 const PRERENDER_ROUTES = ["/", "/about", "/services", "/projects", "/contact"];
 
@@ -21,17 +18,6 @@ export default defineConfig({
     // If you need automatic file-based route generation again, re-add TanStackRouterVite and ensure the package resolves.
     tailwindcss(),
     react(),
-    vitePrerender({
-      staticDir: path.join(__dirname, "dist"),
-      routes: PRERENDER_ROUTES,
-      renderer: new vitePrerender.PuppeteerRenderer({
-        renderAfterTime: 1500,
-        maxConcurrentRoutes: 4,
-        skipThirdPartyRequests: true,
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      }),
-    }),
   ],
   resolve: {
     alias: {
