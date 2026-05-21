@@ -4,11 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
-import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
-
-const PRERENDER_ROUTES = ["/", "/about", "/services", "/projects", "/contact"];
 
 // SPA build: TanStack Router (file-based) + Tailwind v4.
 // Output → dist/, suitable for Vercel static hosting with a SPA fallback.

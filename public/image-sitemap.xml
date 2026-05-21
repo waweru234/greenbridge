@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.greenbridgeenergy.com/</loc>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/media/hero-solar.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/media/services-feature.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.greenbridgeenergy.com/projects</loc>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/media/ground-mount-residential.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/media/install-team-roof.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/media/solar-borehole.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.greenbridgeenergy.com/</loc>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/og-image.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgeenergy.com/logo.png</image:loc>
+    </image:image>
+  </url>
+</urlset>

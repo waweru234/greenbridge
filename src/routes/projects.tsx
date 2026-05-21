@@ -21,6 +21,59 @@ import tubewellVideo from "@/assets/new ones/stock-footage-water-flows-from-a-so
 import pumpVideo1 from "@/assets/new ones/istockphoto-1925055660-640_adpp_is.mp4";
 import pumpVideo2 from "@/assets/new ones/istockphoto-881095546-640_adpp_is.mp4";
 
+const SITE_URL = "https://www.greenbridgeenergy.com";
+const toAbsoluteUrl = (assetPath: string) => new URL(assetPath, SITE_URL).toString();
+
+const PROJECTS_MEDIA_STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/projects#webpage`,
+      url: `${SITE_URL}/projects`,
+      name: "Projects - Greenbridge Energy",
+      description:
+        "Featured renewable energy projects delivered across the UK and Africa, including solar and water-energy systems.",
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/projects#video-solar-tubewell`,
+      name: "Solar-Powered Tubewell Irrigation",
+      description:
+        "Solar-powered tubewell pumping project delivering steady irrigation flow for farmland.",
+      thumbnailUrl: [toAbsoluteUrl(solarPumpPhoto)],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/projects#solar-powered-tubewell-irrigation`,
+      contentUrl: toAbsoluteUrl(tubewellVideo),
+      isFamilyFriendly: true,
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/projects#video-pressure-network`,
+      name: "Pressurized Non-Tower Water Supply",
+      description:
+        "Pressure tank and booster network pilot for stable non-tower water distribution.",
+      thumbnailUrl: [toAbsoluteUrl(pressureTankPhoto)],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/projects#pressurized-non-tower-water-supply`,
+      contentUrl: toAbsoluteUrl(pumpVideo1),
+      isFamilyFriendly: true,
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/projects#video-solar-pump-commissioning`,
+      name: "Solar Pump Commissioning and Operations",
+      description:
+        "Operational demonstration footage of solar-powered pumping hardware in a rural service zone.",
+      thumbnailUrl: [toAbsoluteUrl(waterKit7)],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/projects#solar-pump-commissioning-and-operations`,
+      contentUrl: toAbsoluteUrl(pumpVideo2),
+      isFamilyFriendly: true,
+    },
+  ],
+};
+
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
@@ -47,6 +100,12 @@ interface Project {
   outcome: string;
   tag: string;
 }
+
+const toSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 
 const PROJECTS: Project[] = [
   {
@@ -200,6 +259,11 @@ const KENYA_LANDMARKS = [
 function ProjectsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(PROJECTS_MEDIA_STRUCTURED_DATA) }}
+      />
+
       <section className="py-20 md:py-28 bg-gradient-soft">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-[color:var(--leaf-deep)]">Projects</p>
@@ -217,6 +281,7 @@ function ProjectsPage() {
           {PROJECTS.map((p, i) => (
             <motion.article
               key={p.title}
+              id={toSlug(p.title)}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}

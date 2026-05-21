@@ -1,9 +1,8 @@
 ﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useInView, useMotionValue, animate } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowRight, Sun, Battery, Cpu, Building2, LineChart, Zap, Leaf, Sparkles, MapPin, TrendingDown, Users, Quote, Star, Lightbulb, Wind, Droplets } from "lucide-react";
 import hero from "@/assets/hero-solar.jpg";
-import heroVideo from "@/assets/Hailuo_Video_Just make it look like the sun_505142339831885827.mp4";
 import cinematicSolarVideo from "@/assets/9788594-uhd_3840_2160_24fps.mp4";
 import rooftopSolarVideo from "@/assets/12717378_1920_1080_60fps.mp4";
 import sunriseGridVideo from "@/assets/18712069-uhd_3840_2160_30fps.mp4";
@@ -12,6 +11,73 @@ import projectInstall from "@/assets/uploads/install-team-roof.jpg";
 import projectAfrica from "@/assets/uploads/solar-borehole.jpg";
 import africaMap from "@/assets/africa.svg";
 import servicesFeatureImage from "@/assets/pexels-elite-power-group-661996115-33438126.jpg";
+
+const SITE_URL = "https://www.greenbridgeenergy.com";
+const toAbsoluteUrl = (assetPath: string) => new URL(assetPath, SITE_URL).toString();
+
+const HOME_MEDIA_STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/#home`,
+      url: `${SITE_URL}/`,
+      name: "Greenbridge Energy Home",
+      primaryImageOfPage: { "@id": `${SITE_URL}/#home-hero-image` },
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${SITE_URL}/#home-hero-image`,
+      contentUrl: `${SITE_URL}/media/hero-solar.jpg`,
+      url: `${SITE_URL}/media/hero-solar.jpg`,
+      caption: "Solar farm at sunrise with wind turbines",
+      representativeOfPage: true,
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${SITE_URL}/#services-feature-image`,
+      contentUrl: `${SITE_URL}/media/services-feature.jpg`,
+      url: `${SITE_URL}/media/services-feature.jpg`,
+      caption: "Engineers inspecting solar energy systems during a field deployment",
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/#video-cinematic-deployment`,
+      name: "Cinematic clean-energy deployment at scale",
+      description:
+        "Cinematic installation and performance footage from live renewable energy projects.",
+      thumbnailUrl: [`${SITE_URL}/media/install-team-roof.jpg`],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/#energy-in-motion`,
+      contentUrl: toAbsoluteUrl(cinematicSolarVideo),
+      isFamilyFriendly: true,
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/#video-site-operations`,
+      name: "Precision installation in live conditions",
+      description:
+        "Rooftop and field installation footage showing real solar deployment operations.",
+      thumbnailUrl: [`${SITE_URL}/media/ground-mount-residential.jpg`],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/#energy-in-motion`,
+      contentUrl: toAbsoluteUrl(rooftopSolarVideo),
+      isFamilyFriendly: true,
+    },
+    {
+      "@type": "VideoObject",
+      "@id": `${SITE_URL}/#video-performance-view`,
+      name: "Reliable output through dynamic daylight cycles",
+      description:
+        "Solar generation and grid performance footage captured during real daylight cycles.",
+      thumbnailUrl: [`${SITE_URL}/media/solar-borehole.jpg`],
+      uploadDate: "2026-05-19",
+      embedUrl: `${SITE_URL}/#energy-in-motion`,
+      contentUrl: toAbsoluteUrl(sunriseGridVideo),
+      isFamilyFriendly: true,
+    },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -156,84 +222,28 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
 }
 
 function HomePage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const [canPlayVideo, setCanPlayVideo] = useState(true);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
-
-  // keep the hero muted by default for autoplay compatibility
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.muted = true;
-  }, []);
-
-  // Try to start playback programmatically; if browser blocks autoplay, show a play control
-  useEffect(() => {
-    if (!videoRef.current || !canPlayVideo) return;
-    const vid = videoRef.current;
-    const playPromise = vid.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        setAutoplayBlocked(true);
-      });
-    }
-  }, [videoRef, canPlayVideo]);
-
-  function handleStartPlayback() {
-    if (!videoRef.current) return;
-    videoRef.current.play().then(() => {
-      setAutoplayBlocked(false);
-    }).catch(() => {
-      // still blocked, keep the control visible
-      setAutoplayBlocked(true);
-    });
-  }
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 900], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollY, [0, 700], [1, 0.3]);
+  const heroScale = useTransform(scrollY, [0, 900], [1, 1.1]);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(HOME_MEDIA_STRUCTURED_DATA) }}
+      />
+
       {/* HERO */}
-      <section ref={heroRef} className="relative overflow-hidden">
+      <section className="relative overflow-hidden">
         <motion.div className="absolute inset-0 -z-10" style={{ y: heroY, scale: heroScale }}>
-          {/* Video background with poster fallback. Respects muted state. If user prefers reduced motion the poster will be shown via CSS (motion-reduce). */}
-          {canPlayVideo ? (
-            <video
-              ref={videoRef}
-              className="h-full w-full object-cover"
-              src={heroVideo}
-              preload="metadata"
-              poster={hero}
-              autoPlay
-              loop
-              playsInline
-              muted={true}
-              // prevent tab focus on background media
-              aria-hidden="true"
-              onError={() => setCanPlayVideo(false)}
-              onLoadedData={() => {
-                // debug hook: confirm video loaded
-                // eslint-disable-next-line no-console
-                console.log('Hero video loaded:', heroVideo);
-              }}
-              onPlay={() => {
-                // eslint-disable-next-line no-console
-                console.log('Hero video playing');
-              }}
-            />
-          ) : (
-            <img
-              src={hero}
-              alt="Solar farm at sunrise with wind turbines"
-              className="h-full w-full object-cover hero-fallback-poster"
-              width={1920}
-              height={1080}
-            />
-          )}
+          <img
+            src={hero}
+            alt="Solar farm at sunrise with wind turbines"
+            className="h-full w-full object-cover hero-fallback-poster"
+            width={1920}
+            height={1080}
+          />
           <div className="absolute inset-0 hero-video-overlay" />
 
           {/* Decorative overlays: color wash, vignette and animated light streak */}
@@ -345,7 +355,7 @@ function HomePage() {
           </motion.div>
         </motion.div>
 
-        {/* mute control removed for a clean hero - video stays muted for autoplay */}
+        {/* Static hero image */}
 
         {/* Scroll cue */}
         <motion.div
@@ -394,7 +404,7 @@ function HomePage() {
       </section>
 
       {/* Energy in motion */}
-      <section className="py-20 bg-background">
+      <section id="energy-in-motion" className="py-20 bg-background">
         <div className="mx-auto max-w-7xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -425,6 +435,7 @@ function HomePage() {
               <div className="relative">
                 <video
                   src={cinematicSolarVideo}
+                  poster={`${SITE_URL}/media/install-team-roof.jpg`}
                   className="w-full h-[300px] md:h-[460px] object-cover"
                   autoPlay
                   muted
@@ -452,6 +463,7 @@ function HomePage() {
                 <div className="relative">
                   <video
                     src={rooftopSolarVideo}
+                    poster={`${SITE_URL}/media/ground-mount-residential.jpg`}
                     className="w-full h-[240px] md:h-[218px] object-cover"
                     autoPlay
                     muted
@@ -478,6 +490,7 @@ function HomePage() {
                 <div className="relative">
                   <video
                     src={sunriseGridVideo}
+                    poster={`${SITE_URL}/media/solar-borehole.jpg`}
                     className="w-full h-[240px] md:h-[218px] object-cover"
                     autoPlay
                     muted

@@ -147,8 +147,8 @@ function ContactPage() {
               <Mail className="h-6 w-6 relative" />
               <h3 className="mt-4 text-lg font-semibold relative">Email us anytime</h3>
               <p className="mt-1 text-white/85 text-sm relative">We typically respond within one business day.</p>
-              <a href="mailto:greenbridgegy@outlook.com" className="mt-4 inline-block font-semibold underline-offset-4 hover:underline relative">
-                greenbridgegy@outlook.com
+              <a href="mailto:greenbridgegy@gmail.com" className="mt-4 inline-block font-semibold underline-offset-4 hover:underline relative">
+                greenbridgegy@gmail.com
               </a>
             </div>
             <a

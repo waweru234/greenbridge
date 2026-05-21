@@ -5,3 +5,4 @@ Disallow: /admin
 Disallow: /auth
 
 Sitemap: https://www.greenbridgenergy.com/sitemap.xml
+Sitemap: https://www.greenbridgenergy.com/image-sitemap.xml

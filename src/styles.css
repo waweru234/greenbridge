@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -112,6 +111,7 @@
   }
 
   html {
+    position: relative;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
@@ -119,6 +119,7 @@
   }
 
   body {
+    position: relative;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
