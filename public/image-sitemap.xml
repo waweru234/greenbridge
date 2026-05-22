@@ -4,31 +4,31 @@
   <url>
     <loc>https://www.greenbridgeenergy.com/</loc>
     <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/media/hero-solar.jpg</image:loc>
+      <image:loc>https://www.greenbridgenergy.com/media/hero-solar.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/media/services-feature.jpg</image:loc>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.greenbridgeenergy.com/projects</loc>
-    <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/media/ground-mount-residential.jpg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/media/install-team-roof.jpg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/media/solar-borehole.jpg</image:loc>
+      <image:loc>https://www.greenbridgenergy.com/media/services-feature.jpg</image:loc>
     </image:image>
   </url>
   <url>
-    <loc>https://www.greenbridgeenergy.com/</loc>
+    <loc>https://www.greenbridgenergy.com/projects</loc>
     <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/og-image.jpg</image:loc>
+      <image:loc>https://www.greenbridgenergy.com/media/ground-mount-residential.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://www.greenbridgeenergy.com/logo.png</image:loc>
+      <image:loc>https://www.greenbridgenergy.com/media/install-team-roof.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgenergy.com/media/solar-borehole.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.greenbridgenergy.com/</loc>
+    <image:image>
+      <image:loc>https://www.greenbridgenergy.com/og-image.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.greenbridgenergy.com/logo.png</image:loc>
     </image:image>
   </url>
 </urlset>
